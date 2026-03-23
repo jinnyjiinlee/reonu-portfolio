@@ -1,0 +1,78 @@
+{
+  "nav": {
+    "work": "작업",
+    "about": "소개",
+    "contact": "연락처"
+  },
+  "hero": {
+    "intro": "REONU® — 브랜드와 디지털 경험을 설계하는 디자인 스튜디오입니다. 모션, 명확성, 그리고 시대를 초월하는 크래프트를 통해 브랜드의 본질을 표현합니다.",
+    "scroll": "스크롤"
+  },
+  "statement": {
+    "text": "함께 디자인하고, 상상을 명확함으로, 연결을 아름다움으로 만듭니다.",
+    "body": "REONU®는 명확하고 협력적이며 집중된 프로세스를 유지합니다. 소규모 팀으로 긴밀하게 협업하며, 의도와 정성을 담아 각 프로젝트를 설계합니다."
+  },
+  "services": {
+    "title": "Our Services",
+    "cta": "시작하기",
+    "ctaDesc": "디자인의 명확함을 찾고 계시다면, 함께 만들어 갑시다.",
+    "uxui": {
+      "title": "사용자 중심의 직관적이고 표현력 있는 디지털 경험을 디자인합니다.",
+      "desc": "UX·UI Design",
+      "tags": ["웹사이트 & 플랫폼 디자인", "인터랙션 & 모션 가이드라인", "UI 시스템", "컴포넌트 라이브러리", "반응형 레이아웃"]
+    },
+    "bx": {
+      "title": "브랜드에 정체성과 차별성을 부여하는 아이덴티티 시스템을 구축합니다.",
+      "desc": "BX Design",
+      "tags": ["브랜드 전략", "비주얼 아이덴티티 시스템", "로고 & 마크 개발", "타이포그래피 & 컬러 시스템", "가이드라인 & 에셋 라이브러리"]
+    },
+    "edit": {
+      "title": "아이디어를 컨셉에서 완성까지 안내합니다.",
+      "desc": "Edit Design",
+      "tags": ["비주얼 디렉션", "캠페인 컨셉", "아트 디렉션", "톤 & 내러티브 가이던스", "스타일 프레임워크"]
+    }
+  },
+  "projects": {
+    "title": "SELECTED WORK",
+    "all": "전체",
+    "uxui": "UX·UI",
+    "bx": "BX",
+    "edit": "EDIT",
+    "viewProject": "프로젝트 보기"
+  },
+  "about": {
+    "title": "ABOUT",
+    "bio": "대기업부터 스타트업, 공공기관까지 다양한 조직과 협업해온 브랜드 설계 파트너입니다. 기획·디자인을 통합적으로 연결해 빠르고 유연하게 실행하며, 지속 가능한 브랜드 시스템을 만듭니다.",
+    "yearsExp": "년 경력",
+    "projectsDone": "프로젝트",
+    "categories": "전문 분야",
+    "viewMore": "더 보기",
+    "downloadResume": "이력서 다운로드",
+    "skills": "전문 기술",
+    "experience": "경력"
+  },
+  "contact": {
+    "title": "CONTACT",
+    "cta": "함께 일해요",
+    "ctaDesc": "새로운 프로젝트나 협업에 대해 이야기해 보세요.",
+    "name": "이름",
+    "email": "이메일",
+    "subject": "제목",
+    "message": "메시지",
+    "send": "보내기",
+    "success": "메시지가 전송되었습니다. 감사합니다!",
+    "phone": "전화"
+  },
+  "footer": {
+    "copyright": "REONU DESIGN STUDIO. All rights reserved."
+  },
+  "work": {
+    "client": "클라이언트",
+    "category": "카테고리",
+    "year": "연도",
+    "role": "역할",
+    "prev": "이전 프로젝트",
+    "next": "다음 프로젝트",
+    "backToList": "목록으로"
+  }
+}
