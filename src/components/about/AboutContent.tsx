@@ -122,13 +122,15 @@ const education = {
   },
 };
 
+const teamLabel = { ko: "공동대표", en: "Co-Founders" };
+
 export function AboutContent({ locale, dict }: AboutContentProps) {
   const lang = locale as "ko" | "en";
 
   return (
     <div className="pt-24 md:pt-32">
       {/* Hero */}
-      <section className="min-h-[50vh] flex items-end px-5 md:px-10 pb-12 md:pb-20">
+      <section className="min-h-[40vh] flex items-end px-5 md:px-10 pb-10 md:pb-16">
         <div className="max-w-[1200px] w-full mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -145,183 +147,129 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
         </div>
       </section>
 
-      {/* Bio */}
-      <section className="py-16 md:py-24 px-5 md:px-10 bg-surface">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
+      {/* Profile spread: sticky portrait ↔ career */}
+      <section className="py-12 md:py-20 px-5 md:px-10">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[minmax(320px,420px)_1fr] gap-10 md:gap-20 items-start">
+          {/* Left: sticky portrait */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="md:sticky md:top-36"
           >
             <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm bg-surface">
               <Image
                 src="/images/profile/profile-03.jpg"
                 alt="Hyeri Gwon"
                 fill
-                sizes="(min-width: 768px) 50vw, 100vw"
+                sizes="(min-width: 768px) 420px, 100vw"
                 className="object-cover"
                 priority
               />
             </div>
           </motion.div>
 
+          {/* Right: bio → stats → CTA → philosophy → career → experience → education */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col justify-center"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-14 md:space-y-20"
           >
-            <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
-              {dict.about.bio}
-            </p>
-
-            {/* Stats */}
-            <div className="mt-10 grid grid-cols-3 gap-6">
-              <div>
-                <div className="text-3xl font-bold text-accent">9+</div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-text-muted">
-                  {dict.about.yearsExp}
-                </div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-accent">{liveProjects.length}+</div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-text-muted">
-                  {dict.about.projectsDone}
-                </div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-accent">3</div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-text-muted">
-                  {dict.about.categories}
-                </div>
-              </div>
-            </div>
-
-            {/* Company profile download */}
-            <a
-              href="/profile/reonu-company-profile.pdf"
-              download
-              className="inline-flex items-center gap-2 mt-10 px-6 py-3 bg-foreground text-white text-sm font-medium uppercase tracking-widest rounded-full hover:bg-accent transition-colors duration-300 w-fit"
-            >
-              {dict.about.downloadResume}
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" y1="15" x2="12" y2="3" />
-              </svg>
-            </a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Founders */}
-      <section className="py-16 md:py-24 px-5 md:px-10">
-        <div className="max-w-[1200px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10"
-          >
-            {founders.map((f) => (
-              <div
-                key={f.name}
-                className="relative aspect-[2250/3583] overflow-hidden rounded-sm bg-white"
-              >
-                <Image
-                  src={f.src}
-                  alt={`${f.name} — ${f.role[lang]}`}
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-contain"
-                />
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Design Philosophy */}
-      <section className="py-16 md:py-24 px-5 md:px-10">
-        <div className="max-w-[1200px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 md:gap-16"
-          >
-            <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
-              Design Philosophy
-            </span>
-            <p className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-snug">
-              {philosophy[lang]}
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Career */}
-      <section className="py-16 md:py-24 px-5 md:px-10 bg-surface">
-        <div className="max-w-[1200px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 md:gap-16"
-          >
-            <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
-              Career
-            </span>
-            <div className="space-y-14">
-              {careerGroups.map((group) => (
-                <div key={group.heading.en}>
-                  <h3 className="text-lg md:text-xl font-bold tracking-tight mb-6">
-                    {group.heading[lang]}
-                  </h3>
-                  <ul className="space-y-3">
-                    {group.items[lang].map((item, i) => (
-                      <li
-                        key={i}
-                        className="text-sm md:text-base text-text-secondary leading-relaxed flex gap-3"
-                      >
-                        <span className="text-accent shrink-0">—</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Experience */}
-      <section className="py-16 md:py-24 px-5 md:px-10">
-        <div className="max-w-[1200px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 md:gap-16"
-          >
-            <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
-              Experience
-            </span>
+            {/* Bio + Stats + CTA */}
             <div>
+              <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
+                {dict.about.bio}
+              </p>
+
+              <div className="mt-10 grid grid-cols-3 gap-6">
+                <div>
+                  <div className="text-3xl font-bold text-accent">9+</div>
+                  <div className="mt-1 text-xs uppercase tracking-wider text-text-muted">
+                    {dict.about.yearsExp}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-accent">
+                    {liveProjects.length}+
+                  </div>
+                  <div className="mt-1 text-xs uppercase tracking-wider text-text-muted">
+                    {dict.about.projectsDone}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-accent">3</div>
+                  <div className="mt-1 text-xs uppercase tracking-wider text-text-muted">
+                    {dict.about.categories}
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="/profile/reonu-company-profile.pdf"
+                download
+                className="inline-flex items-center gap-2 mt-10 px-6 py-3 bg-foreground text-white text-sm font-medium uppercase tracking-widest rounded-full hover:bg-accent transition-colors duration-300 w-fit"
+              >
+                {dict.about.downloadResume}
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+              </a>
+            </div>
+
+            {/* Design Philosophy */}
+            <div>
+              <span className="block text-xs uppercase tracking-[0.2em] text-text-muted mb-4">
+                Design Philosophy
+              </span>
+              <p className="text-2xl md:text-3xl font-bold tracking-tight leading-snug">
+                {philosophy[lang]}
+              </p>
+            </div>
+
+            {/* Career */}
+            <div>
+              <span className="block text-xs uppercase tracking-[0.2em] text-text-muted mb-6">
+                Career
+              </span>
+              <div className="space-y-12">
+                {careerGroups.map((group) => (
+                  <div key={group.heading.en}>
+                    <h3 className="text-lg md:text-xl font-bold tracking-tight mb-6">
+                      {group.heading[lang]}
+                    </h3>
+                    <ul className="space-y-3">
+                      {group.items[lang].map((item, i) => (
+                        <li
+                          key={i}
+                          className="text-sm md:text-base text-text-secondary leading-relaxed flex gap-3"
+                        >
+                          <span className="text-accent shrink-0">—</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Experience */}
+            <div>
+              <span className="block text-xs uppercase tracking-[0.2em] text-text-muted mb-6">
+                Experience
+              </span>
               <h3 className="text-lg md:text-xl font-bold tracking-tight mb-6">
                 {ictStartup.heading[lang]}
               </h3>
@@ -337,24 +285,12 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
                 ))}
               </ul>
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Education */}
-      <section className="py-16 md:py-24 px-5 md:px-10 bg-surface">
-        <div className="max-w-[1200px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 md:gap-16"
-          >
-            <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
-              Education
-            </span>
+            {/* Education */}
             <div>
+              <span className="block text-xs uppercase tracking-[0.2em] text-text-muted mb-6">
+                Education
+              </span>
               <h3 className="text-lg md:text-xl font-bold tracking-tight mb-6">
                 {education.heading[lang]}
               </h3>
@@ -369,6 +305,45 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
                   </li>
                 ))}
               </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Co-Founders — placed after Hyeri's deep dive */}
+      <section className="py-16 md:py-24 px-5 md:px-10 bg-surface">
+        <div className="max-w-[1200px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="block text-xs uppercase tracking-[0.2em] text-text-muted mb-10">
+              {teamLabel[lang]}
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10">
+              {founders.map((f) => (
+                <div key={f.name}>
+                  <div className="relative aspect-[2250/3583] overflow-hidden rounded-sm bg-white">
+                    <Image
+                      src={f.src}
+                      alt={`${f.name} — ${f.role[lang]}`}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <p className="text-base font-semibold tracking-tight">
+                      {f.name}
+                    </p>
+                    <p className="mt-1 text-sm text-text-secondary">
+                      {f.role[lang]}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
