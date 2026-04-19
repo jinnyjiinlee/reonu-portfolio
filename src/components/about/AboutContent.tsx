@@ -112,11 +112,14 @@ const ictStartup = {
 };
 
 const education = {
-  ko: ["국민대학교 디자인대학원", "인클루시브 디자인 전공 석사"],
-  en: [
-    "Kookmin University Graduate School of Design",
-    "M.A. in Inclusive Design",
-  ],
+  heading: {
+    ko: "국민대학교 디자인대학원",
+    en: "Kookmin University Graduate School of Design",
+  },
+  items: {
+    ko: ["인클루시브 디자인 전공 석사"],
+    en: ["M.A. in Inclusive Design"],
+  },
 };
 
 export function AboutContent({ locale, dict }: AboutContentProps) {
@@ -351,17 +354,22 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
             <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
               Education
             </span>
-            <ul className="space-y-3">
-              {education[lang].map((item, i) => (
-                <li
-                  key={i}
-                  className="text-base md:text-lg text-foreground leading-relaxed flex gap-3"
-                >
-                  <span className="text-accent shrink-0">—</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <h3 className="text-lg md:text-xl font-bold tracking-tight mb-6">
+                {education.heading[lang]}
+              </h3>
+              <ul className="space-y-3">
+                {education.items[lang].map((item, i) => (
+                  <li
+                    key={i}
+                    className="text-sm md:text-base text-text-secondary leading-relaxed flex gap-3"
+                  >
+                    <span className="text-accent shrink-0">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
         </div>
       </section>
