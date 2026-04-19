@@ -1,15 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import type { Dictionary } from "@/types/dictionary";
+import { liveProjects } from "@/data/projects";
 
 interface HeroProps {
   dict: Dictionary;
   locale?: string;
 }
 
+const PLACEHOLDER = "/images/placeholder.svg";
+const rotatingProjects = liveProjects
+  .filter((p) => p.thumbnail && p.thumbnail !== PLACEHOLDER)
+  .slice(0, 8);
+
 export function Hero({ dict, locale = "en" }: HeroProps) {
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    if (rotatingProjects.length < 2) return;
+    const id = setInterval(
+      () => setActiveIdx((i) => (i + 1) % rotatingProjects.length),
+      3000,
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  const active = rotatingProjects[activeIdx];
+
   return (
     <section className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-24 pb-10">
       <div className="max-w-[1400px] w-full mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16 flex-1">
@@ -33,7 +54,7 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
           className="flex-1 flex items-center justify-center relative"
         >
           <Link
-            href={`/${locale}/work`}
+            href={active ? `/${locale}/work/${active.slug}` : `/${locale}/work`}
             className="group relative w-[55%] md:w-[50%] aspect-[3/4] cursor-pointer"
           >
             {/* Layer 5 (back) - dark */}
@@ -48,11 +69,29 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
             {/* Layer 2 - light yellow */}
             <div className="absolute inset-0 bg-[#FADA5E] rotate-[1deg] translate-x-1 -translate-y-1 rounded-sm shadow-sm" />
 
-            {/* Layer 1 (front) - main accent/orange */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FF8C00] to-[#FF6B00] rounded-sm overflow-hidden flex items-center justify-center">
-              <span className="text-white/30 text-xs uppercase tracking-widest">
-                Portfolio Image
-              </span>
+            {/* Layer 1 (front) - rotating project cover */}
+            <div className="absolute inset-0 rounded-sm overflow-hidden bg-surface shadow-lg">
+              <AnimatePresence mode="wait">
+                {active && (
+                  <motion.div
+                    key={active.slug}
+                    initial={{ opacity: 0, scale: 1.04 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={active.thumbnail}
+                      alt={active.title.en}
+                      fill
+                      sizes="(min-width: 1024px) 30vw, 55vw"
+                      className="object-cover"
+                      priority
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Hover: circular arrow button */}

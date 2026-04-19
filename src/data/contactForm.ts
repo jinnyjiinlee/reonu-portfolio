@@ -57,7 +57,7 @@ export const contactContent: ContactContent = {
       ],
       en: [
         "Tell us a little about your project.",
-        "We'll guide you based on your budget and timeline.",
+        "We\u2019ll guide you based on your budget and timeline.",
       ],
     },
   },

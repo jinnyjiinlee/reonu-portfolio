@@ -23,29 +23,101 @@ const founders = [
   },
 ];
 
-const skills = [
-  "UI/UX Design",
-  "Brand Identity",
-  "Editorial Design",
-  "Web/App Design",
-  "Design System",
-  "Prototyping",
-  "Figma",
-  "Adobe Creative Suite",
+const philosophy = {
+  ko: "최소한의 그러나 더 나은 디자인을 지향합니다.",
+  en: "Designing less, but better.",
+};
+
+const careerGroups = [
+  {
+    heading: { ko: "UXUI DESIGN", en: "UXUI DESIGN" },
+    items: {
+      ko: [
+        "KT New Platform (momo) 구축",
+        "롯데손해보험 (wonder) 구축",
+        "신한자산운용 구축 및 운영",
+        "신한카드 SOL 구축 및 운영",
+        "KB증권 구축 및 운영",
+        "KB자산운용 구축 및 운영",
+        "CJ 온스타일 운영",
+      ],
+      en: [
+        "KT New Platform (momo) — build",
+        "Lotte Insurance (wonder) — build",
+        "Shinhan Asset Management — build & operate",
+        "Shinhan Card SOL — build & operate",
+        "KB Securities — build & operate",
+        "KB Asset Management — build & operate",
+        "CJ Onstyle — operate",
+      ],
+    },
+  },
+  {
+    heading: { ko: "EDIT / BX DESIGN", en: "EDIT / BX DESIGN" },
+    items: {
+      ko: [
+        "교육청 교육용 책자 제작",
+        "송파구청 일자리 정책담당과 신사업 홍보물 디자인",
+        "국어문화원, HK인문학센터 웹포스터 디자인",
+        "문체부 홍보 포스터 / SNS 카드뉴스 디자인",
+        "국제산악영화제 책자 디자인",
+        "국민대학교 디자인대학원 홍보물 디자인",
+        "(주)트립픽 브랜딩 / 서비스 캐릭터 디자인",
+        "등 다수 관공서, 교육기관, 기업 홍보물 / 브랜딩",
+      ],
+      en: [
+        "Office of Education — educational booklets",
+        "Songpa-gu Office Employment Policy — new-business promotional design",
+        "Korean Language & Culture Institute, HK Humanities Center — web posters",
+        "Ministry of Culture, Sports and Tourism — promotional posters / SNS card news",
+        "International Mountain Film Festival — booklet design",
+        "Kookmin University Graduate School of Design — promotional design",
+        "Trippick Inc. — branding / service character design",
+        "And many other public, educational, and corporate branding projects",
+      ],
+    },
+  },
 ];
 
-const experience = [
-  {
-    period: "2025 - Present",
-    role: { ko: "REONU DESIGN STUDIO 공동대표 · 디자이너", en: "REONU DESIGN STUDIO Co-Founder · Designer" },
-    desc: { ko: "브랜드 & 프로덕트 디자인 스튜디오 운영", en: "Brand & Product Design Studio" },
+const ictStartup = {
+  heading: { ko: "ICT START-UP", en: "ICT START-UP" },
+  items: {
+    ko: [
+      "ICT 스타트업 아이시온 운영 및 디자인 총괄",
+      "SK C&C 협업 Vitality Summit 서비스 노출",
+      "ICT TECH SUMMIT 온라인 전시, 체험관",
+      "스마트미디어 X캠프 우수상 수상",
+      "안구운동 놀이APP서비스 BM특허 등록 완료",
+      "시선추적기반 안구운동놀이APP 출시",
+      "송파 청년창업도전프로젝트 최종 기업 선정",
+      "고려대학교 안암병원 재활의학 컨소시엄",
+      "미국 실리콘밸리 최종 피칭 선정",
+      "미국 스탠퍼드 디자인스쿨 수료",
+      "성장기 어린이 안구운동 놀이APP 디자인 논문",
+    ],
+    en: [
+      "Co-founded ICT startup ISION — operations & design lead",
+      "SK C&C collaboration — Vitality Summit service showcase",
+      "ICT TECH SUMMIT — online exhibition & experience zone",
+      "Smart Media X Camp — Excellence Award",
+      "Eye-movement play app — BM patent registered",
+      "Gaze-tracking eye-movement play app — launched",
+      "Songpa Youth Startup Challenge — final selection",
+      "Korea University Anam Hospital — rehabilitation medicine consortium",
+      "US Silicon Valley — final pitch selection",
+      "Stanford d.school — completed program",
+      "Published paper on eye-movement play app design for children",
+    ],
   },
-  {
-    period: "2017 - 2025",
-    role: { ko: "시니어 디자이너", en: "Senior Designer" },
-    desc: { ko: "다양한 기업 및 기관 프로젝트 수행", en: "Various corporate and institutional projects" },
-  },
-];
+};
+
+const education = {
+  ko: ["국민대학교 디자인대학원", "인클루시브 디자인 전공 석사"],
+  en: [
+    "Kookmin University Graduate School of Design",
+    "M.A. in Inclusive Design",
+  ],
+};
 
 export function AboutContent({ locale, dict }: AboutContentProps) {
   const lang = locale as "ko" | "en";
@@ -161,14 +233,14 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
             {founders.map((f) => (
               <div
                 key={f.name}
-                className="relative aspect-[3/4] overflow-hidden rounded-sm bg-surface"
+                className="relative aspect-[2250/3583] overflow-hidden rounded-sm bg-white"
               >
                 <Image
                   src={f.src}
                   alt={`${f.name} — ${f.role[lang]}`}
                   fill
                   sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             ))}
@@ -176,7 +248,7 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
         </div>
       </section>
 
-      {/* Skills */}
+      {/* Design Philosophy */}
       <section className="py-16 md:py-24 px-5 md:px-10">
         <div className="max-w-[1200px] mx-auto">
           <motion.div
@@ -184,25 +256,19 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 md:gap-16"
           >
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-10">
-              {dict.about.skills}
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-4 py-2 border border-border rounded-full text-sm text-text-secondary hover:border-accent hover:text-accent transition-colors"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+            <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
+              Design Philosophy
+            </span>
+            <p className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-snug">
+              {philosophy[lang]}
+            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Experience */}
+      {/* Career */}
       <section className="py-16 md:py-24 px-5 md:px-10 bg-surface">
         <div className="max-w-[1200px] mx-auto">
           <motion.div
@@ -210,30 +276,92 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 md:gap-16"
           >
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-10">
-              {dict.about.experience}
-            </h2>
-            <div className="space-y-8">
-              {experience.map((exp, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col md:flex-row md:items-start gap-4 md:gap-12 pb-8 border-b border-border last:border-0"
-                >
-                  <span className="text-sm text-text-muted font-medium md:w-48 shrink-0">
-                    {exp.period}
-                  </span>
-                  <div>
-                    <h3 className="text-base font-semibold">
-                      {exp.role[lang]}
-                    </h3>
-                    <p className="mt-1 text-sm text-text-secondary">
-                      {exp.desc[lang]}
-                    </p>
-                  </div>
+            <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
+              Career
+            </span>
+            <div className="space-y-14">
+              {careerGroups.map((group) => (
+                <div key={group.heading.en}>
+                  <h3 className="text-lg md:text-xl font-bold tracking-tight mb-6">
+                    {group.heading[lang]}
+                  </h3>
+                  <ul className="space-y-3">
+                    {group.items[lang].map((item, i) => (
+                      <li
+                        key={i}
+                        className="text-sm md:text-base text-text-secondary leading-relaxed flex gap-3"
+                      >
+                        <span className="text-accent shrink-0">—</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Experience */}
+      <section className="py-16 md:py-24 px-5 md:px-10">
+        <div className="max-w-[1200px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 md:gap-16"
+          >
+            <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
+              Experience
+            </span>
+            <div>
+              <h3 className="text-lg md:text-xl font-bold tracking-tight mb-6">
+                {ictStartup.heading[lang]}
+              </h3>
+              <ul className="space-y-3">
+                {ictStartup.items[lang].map((item, i) => (
+                  <li
+                    key={i}
+                    className="text-sm md:text-base text-text-secondary leading-relaxed flex gap-3"
+                  >
+                    <span className="text-accent shrink-0">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Education */}
+      <section className="py-16 md:py-24 px-5 md:px-10 bg-surface">
+        <div className="max-w-[1200px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 md:gap-16"
+          >
+            <span className="text-xs uppercase tracking-[0.2em] text-text-muted">
+              Education
+            </span>
+            <ul className="space-y-3">
+              {education[lang].map((item, i) => (
+                <li
+                  key={i}
+                  className="text-base md:text-lg text-foreground leading-relaxed flex gap-3"
+                >
+                  <span className="text-accent shrink-0">—</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </motion.div>
         </div>
       </section>
