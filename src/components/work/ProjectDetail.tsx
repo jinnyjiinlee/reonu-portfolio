@@ -26,7 +26,7 @@ export function ProjectDetail({
   const categoryLabel = CATEGORY_LABEL[project.category][lang];
 
   return (
-    <div className="pt-24 md:pt-32">
+    <div className="pt-32 md:pt-44">
       {/* Hero */}
       <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-end overflow-hidden bg-surface">
         {project.thumbnail && (

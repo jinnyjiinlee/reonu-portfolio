@@ -4,6 +4,7 @@ import { locales } from "@/lib/getDictionary";
 import { getDictionary } from "@/lib/getDictionary";
 import { Navigation } from "@/components/layout/Navigation";
 import { Footer } from "@/components/layout/Footer";
+import { CustomCursor } from "@/components/layout/CustomCursor";
 import { SmoothScrollProvider } from "@/components/shared/SmoothScrollProvider";
 
 const inter = Inter({
@@ -72,6 +73,7 @@ export default async function LocaleLayout({
       </head>
       <body className="min-h-screen flex flex-col antialiased">
         <SmoothScrollProvider>
+          <CustomCursor />
           <Navigation locale={locale} dict={dict} />
           <main className="flex-1">{children}</main>
           <Footer locale={locale} dict={dict} />

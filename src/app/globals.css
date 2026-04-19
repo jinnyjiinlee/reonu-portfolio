@@ -58,3 +58,24 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Custom cursor — hide native cursor on fine-pointer devices.
+   !important because Tailwind utilities (cursor-pointer, cursor-text, etc.)
+   override the base rule otherwise. */
+html.cursor-custom,
+html.cursor-custom body,
+html.cursor-custom *,
+html.cursor-custom *::before,
+html.cursor-custom *::after {
+  cursor: none !important;
+}
+
+@media (pointer: coarse) {
+  html.cursor-custom,
+  html.cursor-custom body,
+  html.cursor-custom *,
+  html.cursor-custom *::before,
+  html.cursor-custom *::after {
+    cursor: auto !important;
+  }
+}

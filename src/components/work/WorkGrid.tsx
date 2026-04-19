@@ -44,7 +44,7 @@ export function WorkGrid({ locale, dict }: WorkGridProps) {
   };
 
   return (
-    <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-28 md:pt-36 pb-24">
+    <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-32 md:pt-44 pb-24">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -128,7 +128,7 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
   const lang = locale as "ko" | "en";
 
   return (
-    <div className="pt-24 md:pt-32">
+    <div className="pt-32 md:pt-44">
       {/* Hero */}
       <section className="min-h-[40vh] flex items-end px-5 md:px-10 pb-10 md:pb-16">
         <div className="max-w-[1200px] w-full mx-auto">

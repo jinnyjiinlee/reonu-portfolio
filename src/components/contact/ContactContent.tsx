@@ -66,7 +66,7 @@ export function ContactContent({ locale, dict }: ContactContentProps) {
   }
 
   return (
-    <div className="pt-24 md:pt-32">
+    <div className="pt-32 md:pt-44">
       <section className="min-h-[40vh] flex items-end px-5 md:px-10 pb-12 md:pb-20">
         <div className="max-w-[1200px] w-full mx-auto">
           <motion.div

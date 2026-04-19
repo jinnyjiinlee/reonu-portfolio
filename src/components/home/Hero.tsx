@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Dictionary } from "@/types/dictionary";
+import type { Project } from "@/types/project";
 import { liveProjects } from "@/data/projects";
 
 interface HeroProps {
@@ -13,26 +14,55 @@ interface HeroProps {
 }
 
 const PLACEHOLDER = "/images/placeholder.svg";
-const rotatingProjects = liveProjects
-  .filter((p) => p.thumbnail && p.thumbnail !== PLACEHOLDER)
-  .slice(0, 8);
+const rotatingProjects = liveProjects.filter(
+  (p) => p.thumbnail && p.thumbnail !== PLACEHOLDER,
+);
+
+const MAX_STACK = 5;
+
+// Deterministic per-depth offsets — bottom of stack is most rotated, top sits flat.
+// Depth 0 = topmost (newest, face-up). Higher depth = deeper in the pile.
+const stackOffsets = [
+  { rotate: 0, x: 0, y: 0 },
+  { rotate: 1.5, x: 6, y: -4 },
+  { rotate: -3, x: -10, y: 6 },
+  { rotate: 5, x: 10, y: 4 },
+  { rotate: 8, x: 16, y: -6 },
+];
+
+type Card = { id: number; project: Project };
 
 export function Hero({ dict, locale = "en" }: HeroProps) {
-  const [activeIdx, setActiveIdx] = useState(0);
+  const [stack, setStack] = useState<Card[]>([]);
+  const cardIdRef = useRef(0);
+  const projectIdxRef = useRef(0);
 
   useEffect(() => {
-    if (rotatingProjects.length < 2) return;
-    const id = setInterval(
-      () => setActiveIdx((i) => (i + 1) % rotatingProjects.length),
-      3000,
-    );
-    return () => clearInterval(id);
+    if (!rotatingProjects.length) return;
+
+    const addCard = () => {
+      const project =
+        rotatingProjects[projectIdxRef.current % rotatingProjects.length];
+      projectIdxRef.current += 1;
+      cardIdRef.current += 1;
+      const card: Card = { id: cardIdRef.current, project };
+      setStack((prev) => {
+        const next = [...prev, card];
+        return next.length > MAX_STACK
+          ? next.slice(next.length - MAX_STACK)
+          : next;
+      });
+    };
+
+    addCard(); // seed immediately
+    const interval = setInterval(addCard, 2500);
+    return () => clearInterval(interval);
   }, []);
 
-  const active = rotatingProjects[activeIdx];
+  const topCard = stack[stack.length - 1];
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-28 md:pt-36 pb-10">
+    <section className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-32 md:pt-44 pb-10">
       <div className="max-w-[1400px] w-full mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16 flex-1">
         {/* Left: Intro text */}
         <motion.div
@@ -46,7 +76,7 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
           </p>
         </motion.div>
 
-        {/* Right: Stacked images with hover CTA */}
+        {/* Right: Portfolio stack — cards pile up every few seconds */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -54,48 +84,64 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
           className="flex-1 flex items-center justify-center relative"
         >
           <Link
-            href={active ? `/${locale}/work/${active.slug}` : `/${locale}/work`}
-            className="group relative w-[55%] md:w-[50%] aspect-[3/4] cursor-pointer"
+            href={
+              topCard
+                ? `/${locale}/work/${topCard.project.slug}`
+                : `/${locale}/work`
+            }
+            className="group relative w-[55%] md:w-[50%] aspect-[3/4]"
           >
-            {/* Layer 5 (back) - dark */}
-            <div className="absolute inset-0 bg-foreground rotate-[8deg] translate-x-4 -translate-y-2 rounded-sm shadow-lg" />
-
-            {/* Layer 4 - wood/brown tone */}
-            <div className="absolute inset-0 bg-[#8B7355] rotate-[5deg] translate-x-2 translate-y-1 rounded-sm shadow-md" />
-
-            {/* Layer 3 - yellow */}
-            <div className="absolute inset-0 bg-[#F5C842] -rotate-[3deg] -translate-x-2 translate-y-2 rounded-sm shadow-md" />
-
-            {/* Layer 2 - light yellow */}
-            <div className="absolute inset-0 bg-[#FADA5E] rotate-[1deg] translate-x-1 -translate-y-1 rounded-sm shadow-sm" />
-
-            {/* Layer 1 (front) - rotating project cover */}
-            <div className="absolute inset-0 rounded-sm overflow-hidden bg-surface shadow-lg">
-              <AnimatePresence mode="wait">
-                {active && (
+            <AnimatePresence initial={false}>
+              {stack.map((card, idx) => {
+                // depth 0 = topmost, growing downward into the pile
+                const depth = stack.length - 1 - idx;
+                const offset =
+                  stackOffsets[Math.min(depth, stackOffsets.length - 1)];
+                return (
                   <motion.div
-                    key={active.slug}
-                    initial={{ opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute inset-0"
+                    key={card.id}
+                    initial={{
+                      opacity: 0,
+                      y: -120,
+                      x: offset.x,
+                      rotate: offset.rotate + 12,
+                      scale: 0.9,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: offset.y,
+                      x: offset.x,
+                      rotate: offset.rotate,
+                      scale: 1,
+                    }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 140,
+                      damping: 18,
+                      mass: 0.9,
+                    }}
+                    style={{ zIndex: idx }}
+                    className="absolute inset-0 rounded-sm overflow-hidden bg-surface shadow-lg"
                   >
                     <Image
-                      src={active.thumbnail}
-                      alt={active.title.en}
+                      src={card.project.thumbnail}
+                      alt={card.project.title.en}
                       fill
                       sizes="(min-width: 1024px) 30vw, 55vw"
                       className="object-cover"
-                      priority
+                      priority={depth === 0}
                     />
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                );
+              })}
+            </AnimatePresence>
 
-            {/* Hover: circular arrow button */}
-            <div className="absolute inset-0 flex items-center justify-center z-10">
+            {/* Hover: circular arrow button (always above the stack) */}
+            <div
+              className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              style={{ zIndex: MAX_STACK + 1 }}
+            >
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileHover={{ scale: 1.1 }}
