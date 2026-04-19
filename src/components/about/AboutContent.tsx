@@ -123,7 +123,7 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
   const lang = locale as "ko" | "en";
 
   return (
-    <div className="pt-20">
+    <div className="pt-24 md:pt-32">
       {/* Hero */}
       <section className="min-h-[50vh] flex items-end px-5 md:px-10 pb-12 md:pb-20">
         <div className="max-w-[1200px] w-full mx-auto">
@@ -196,9 +196,9 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
               </div>
             </div>
 
-            {/* Resume download */}
+            {/* Company profile download */}
             <a
-              href="/resume/resume-hyeri-gwon.pdf"
+              href="/profile/reonu-company-profile.pdf"
               download
               className="inline-flex items-center gap-2 mt-10 px-6 py-3 bg-foreground text-white text-sm font-medium uppercase tracking-widest rounded-full hover:bg-accent transition-colors duration-300 w-fit"
             >

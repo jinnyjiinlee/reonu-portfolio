@@ -26,7 +26,7 @@ export function Navigation({ locale, dict }: NavigationProps) {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-20 md:h-24 bg-white/90 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 h-24 md:h-32 bg-white/90 backdrop-blur-md">
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href={`/${locale}`} aria-label="REONU Home" className="flex items-center">
@@ -34,19 +34,19 @@ export function Navigation({ locale, dict }: NavigationProps) {
           <Image
             src="/images/logo/logo-03.png"
             alt="REONU"
-            width={80}
-            height={80}
+            width={160}
+            height={160}
             priority
-            className="sm:hidden w-12 h-12"
+            className="sm:hidden w-16 h-16"
           />
           {/* Desktop: symbol + wordmark */}
           <Image
             src="/images/logo/logo-02.png"
             alt="REONU"
-            width={600}
-            height={150}
+            width={800}
+            height={200}
             priority
-            className="hidden sm:block h-10 md:h-12 w-auto"
+            className="hidden sm:block h-16 md:h-20 w-auto"
           />
         </Link>
 

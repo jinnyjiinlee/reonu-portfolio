@@ -32,7 +32,7 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
   const active = rotatingProjects[activeIdx];
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-24 pb-10">
+    <section className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-28 md:pt-36 pb-10">
       <div className="max-w-[1400px] w-full mx-auto flex flex-col lg:flex-row gap-8 lg:gap-16 flex-1">
         {/* Left: Intro text */}
         <motion.div
