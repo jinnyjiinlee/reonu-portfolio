@@ -74,10 +74,7 @@ export function ContactContent({ locale, dict }: ContactContentProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs uppercase tracking-[0.3em] text-text-muted font-medium">
-              {dict.contact.title}
-            </span>
-            <h1 className="mt-4 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
               {contactContent.header.title[lang]}
             </h1>
             <div className="mt-4 text-lg text-text-secondary max-w-lg">
@@ -147,31 +144,6 @@ export function ContactContent({ locale, dict }: ContactContentProps) {
               >
                 reonustudio@gmail.com
               </a>
-            </div>
-            <div>
-              <h3 className="text-xs uppercase tracking-widest text-text-muted mb-3">
-                {dict.contact.phone}
-              </h3>
-              <div className="space-y-1">
-                <p className="text-base font-medium">+1 682 272 2007</p>
-                <p className="text-base font-medium">+82 10 7709 7124</p>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-xs uppercase tracking-widest text-text-muted mb-3">
-                Social
-              </h3>
-              <div className="space-y-2">
-                <a href="https://instagram.com/reonustudio" target="_blank" rel="noopener noreferrer" className="block text-base font-medium">
-                  Instagram
-                </a>
-                <a href="https://behance.net/reonustudio" target="_blank" rel="noopener noreferrer" className="block text-base font-medium">
-                  Behance
-                </a>
-                <a href="https://linkedin.com/in/reonustudio" target="_blank" rel="noopener noreferrer" className="block text-base font-medium">
-                  LinkedIn
-                </a>
-              </div>
             </div>
           </motion.div>
         </div>

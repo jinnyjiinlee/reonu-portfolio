@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -28,11 +29,25 @@ export function Navigation({ locale, dict }: NavigationProps) {
     <header className="fixed top-0 left-0 right-0 z-50 h-16 md:h-20 bg-white/90 backdrop-blur-md">
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 h-full flex items-center justify-between">
         {/* Logo */}
-        <Link
-          href={`/${locale}`}
-          className="text-base font-black tracking-tight text-foreground"
-        >
-          REONU<span className="text-accent">&reg;</span>
+        <Link href={`/${locale}`} aria-label="REONU Home" className="flex items-center">
+          {/* Mobile: symbol only */}
+          <Image
+            src="/images/logo/logo-03.png"
+            alt="REONU"
+            width={32}
+            height={32}
+            priority
+            className="sm:hidden w-7 h-7"
+          />
+          {/* Desktop: symbol + wordmark */}
+          <Image
+            src="/images/logo/logo-02.png"
+            alt="REONU"
+            width={600}
+            height={150}
+            priority
+            className="hidden sm:block h-7 md:h-8 w-auto"
+          />
         </Link>
 
         {/* Desktop Nav */}

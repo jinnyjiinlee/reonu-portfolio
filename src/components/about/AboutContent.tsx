@@ -46,10 +46,7 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-xs uppercase tracking-[0.3em] text-text-muted font-medium">
-              {dict.about.title}
-            </span>
-            <h1 className="mt-4 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
               HYERI GWON
             </h1>
             <p className="mt-2 text-lg md:text-xl text-text-secondary">

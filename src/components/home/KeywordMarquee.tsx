@@ -3,12 +3,36 @@
 import { motion } from "framer-motion";
 
 const keywords = [
-  { text: "creativity", x: "-5%", y: "8%", size: "text-[3rem] md:text-[5rem] lg:text-[7rem]" },
-  { text: "imagination", x: "55%", y: "22%", size: "text-[3rem] md:text-[5rem] lg:text-[7rem]" },
-  { text: "beauty", x: "2%", y: "52%", size: "text-[4rem] md:text-[6rem] lg:text-[8rem]" },
-  { text: "design", x: "12%", y: "68%", size: "text-[4rem] md:text-[6rem] lg:text-[8rem]" },
-  { text: "turning", x: "65%", y: "48%", size: "text-[3rem] md:text-[5rem] lg:text-[6rem]" },
-  { text: "clarity", x: "40%", y: "78%", size: "text-[3rem] md:text-[4rem] lg:text-[6rem]" },
+  {
+    text: "creativity",
+    className:
+      "left-[2%] md:left-[-5%] top-[6%] md:top-[8%] text-[2.25rem] sm:text-[3rem] md:text-[5rem] lg:text-[7rem]",
+  },
+  {
+    text: "imagination",
+    className:
+      "left-[38%] md:left-[55%] top-[22%] text-[2rem] sm:text-[3rem] md:text-[5rem] lg:text-[7rem]",
+  },
+  {
+    text: "beauty",
+    className:
+      "left-[4%] md:left-[2%] top-[44%] md:top-[52%] text-[2.75rem] sm:text-[4rem] md:text-[6rem] lg:text-[8rem]",
+  },
+  {
+    text: "design",
+    className:
+      "left-[14%] md:left-[12%] top-[62%] md:top-[68%] text-[2.75rem] sm:text-[4rem] md:text-[6rem] lg:text-[8rem]",
+  },
+  {
+    text: "turning",
+    className:
+      "left-[46%] md:left-[65%] top-[46%] md:top-[48%] text-[2rem] sm:text-[3rem] md:text-[5rem] lg:text-[6rem]",
+  },
+  {
+    text: "clarity",
+    className:
+      "left-[30%] md:left-[40%] top-[78%] text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[6rem]",
+  },
 ];
 
 export function KeywordMarquee() {
@@ -21,8 +45,7 @@ export function KeywordMarquee() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className={`absolute font-black tracking-tight text-foreground select-none ${kw.size}`}
-          style={{ left: kw.x, top: kw.y }}
+          className={`absolute font-black tracking-tight text-foreground select-none whitespace-nowrap ${kw.className}`}
         >
           {kw.text}
         </motion.span>

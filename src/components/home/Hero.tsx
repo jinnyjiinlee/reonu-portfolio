@@ -90,7 +90,7 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] xl:text-[12rem] font-black leading-[0.85] tracking-tighter text-foreground"
+            className="text-[3.5rem] sm:text-[5rem] md:text-[7.5rem] lg:text-[9.5rem] xl:text-[11.5rem] font-black leading-[0.85] tracking-tighter text-foreground"
           >
             REONU<span className="text-accent">®</span>
           </motion.h1>

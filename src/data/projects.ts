@@ -428,7 +428,22 @@ const imagePath = (folderName: string, file: string) =>
 const PLACEHOLDER = "/images/placeholder.svg";
 
 // Flip to true per-project once real assets are placed in public/images/projects/<folderName>/.
-const assetsReadySlugs = new Set<string>([]);
+const assetsReadySlugs = new Set<string>([
+  "kt-momo",
+  "lotte-wonder",
+  "shinhan-card-sol",
+  "kb-securities",
+  "cj-onstyle",
+  "lash-website",
+  "reonu-branding",
+  "dayfocus-lab",
+  "tripick",
+  "moe-mental-health",
+  "kookmin-gsd",
+  "shinhan-asset",
+  "onsaemiro",
+  "mountain-film-festival",
+]);
 
 export const projects: Project[] = rawProjects.map((p, idx) => {
   const ready = assetsReadySlugs.has(p.slug);

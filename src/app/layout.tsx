@@ -14,13 +14,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "REONU DESIGN STUDIO",
-    images: ["/images/og/og-default.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-  },
-  icons: {
-    icon: "/favicon.ico",
   },
 };
 
