@@ -23,7 +23,7 @@ export default async function HomePage({
       <Hero dict={dict} locale={locale} />
       <KeywordMarquee />
       <Statement dict={dict} />
-      <ProjectCounter />
+      <ProjectCounter locale={locale} />
       <FeaturedWork locale={locale} dict={dict} />
       <Services locale={locale} dict={dict} />
       <Process locale={locale} />

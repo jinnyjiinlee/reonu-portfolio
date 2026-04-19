@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { getFeaturedProjects, liveProjects } from "@/data/projects";
+import { getFeaturedProjects } from "@/data/projects";
 import type { Dictionary } from "@/types/dictionary";
 
 interface FeaturedWorkProps {
@@ -76,10 +76,6 @@ export function FeaturedWork({ locale, dict }: FeaturedWorkProps) {
             </motion.div>
           ))}
         </div>
-
-        <p className="mt-12 text-xs uppercase tracking-widest text-text-muted text-center">
-          {liveProjects.length}&nbsp;Projects
-        </p>
       </div>
     </section>
   );
