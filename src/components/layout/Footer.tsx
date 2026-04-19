@@ -21,7 +21,7 @@ export function Footer({ locale, dict }: FooterProps) {
               alt="REONU"
               width={600}
               height={150}
-              className="h-6 md:h-7 w-auto"
+              className="h-9 md:h-10 w-auto"
             />
           </Link>
           <p className="text-[11px] text-text-muted text-center md:text-left">

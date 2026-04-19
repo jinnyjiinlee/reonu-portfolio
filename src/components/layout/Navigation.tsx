@@ -34,10 +34,10 @@ export function Navigation({ locale, dict }: NavigationProps) {
           <Image
             src="/images/logo/logo-03.png"
             alt="REONU"
-            width={32}
-            height={32}
+            width={80}
+            height={80}
             priority
-            className="sm:hidden w-7 h-7"
+            className="sm:hidden w-10 h-10"
           />
           {/* Desktop: symbol + wordmark */}
           <Image
@@ -46,7 +46,7 @@ export function Navigation({ locale, dict }: NavigationProps) {
             width={600}
             height={150}
             priority
-            className="hidden sm:block h-7 md:h-8 w-auto"
+            className="hidden sm:block h-10 md:h-12 w-auto"
           />
         </Link>
 
