@@ -13,35 +13,20 @@
     "body": "At REONU®, we keep our process clear, collaborative, and focused. We work closely as a small team, shaping each project with intention and care."
   },
   "services": {
-    "title": "Our Services",
-    "cta": "Get Started",
-    "ctaDesc": "If you're looking for clarity in design, let's build it together.",
-    "uxui": {
-      "title": "We design intuitive, expressive digital experiences that feel seamless.",
-      "desc": "UX·UI Design",
-      "tags": ["Website & Platform Design", "Interaction & Motion Guidelines", "UI Systems", "Component Libraries", "Responsive Layouts"]
-    },
-    "bx": {
-      "title": "We create identity systems that bring meaning and distinction to brands.",
-      "desc": "BX Design",
-      "tags": ["Brand Strategy", "Visual Identity System", "Logo & Mark Development", "Typography & Color System", "Guidelines & Asset Library"]
-    },
-    "edit": {
-      "title": "We guide ideas from concept to completion — thoughtfully and precisely.",
-      "desc": "Edit Design",
-      "tags": ["Visual Direction", "Campaign Concepts", "Art Direction for Photo & Film", "Tone & Narrative Guidance", "Style Frameworks"]
-    }
+    "title": "Our Services"
   },
   "projects": {
-    "title": "SELECTED WORK",
+    "title": "Selected Work",
+    "counterLabel": "Completed Projects",
     "all": "All",
-    "uxui": "UX·UI",
-    "bx": "BX",
-    "edit": "EDIT",
-    "viewProject": "View Project"
+    "uxui": "UX/UI",
+    "branding": "Branding",
+    "editorial": "Editorial",
+    "viewProject": "View Project",
+    "viewAll": "View All"
   },
   "about": {
-    "title": "ABOUT",
+    "title": "About",
     "bio": "We are a brand design partner that works with a wide range of organizations, from large corporations to startups and public institutions. By connecting strategy and design, we work quickly and flexibly to build sustainable brand systems.",
     "yearsExp": "Years Exp.",
     "projectsDone": "Projects",
@@ -52,22 +37,19 @@
     "experience": "Experience"
   },
   "contact": {
-    "title": "CONTACT",
+    "title": "Contact",
     "cta": "Let's Work Together",
-    "ctaDesc": "Let's talk about your next project or collaboration.",
-    "name": "Name",
-    "email": "Email",
-    "subject": "Subject",
-    "message": "Message",
-    "send": "Send",
-    "success": "Your message has been sent. Thank you!",
-    "phone": "Phone"
+    "success": "Your inquiry has been sent. Thank you.",
+    "error": "Something went wrong. Please try again shortly.",
+    "phone": "Phone",
+    "email": "Email"
   },
   "footer": {
     "copyright": "REONU DESIGN STUDIO. All rights reserved."
   },
   "work": {
-    "client": "Client",
+    "title": "Work",
+    "intro": "A selection of design projects across brand, digital, and editorial work.",
     "category": "Category",
     "year": "Year",
     "role": "Role",

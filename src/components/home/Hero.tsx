@@ -33,7 +33,7 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
           className="flex-1 flex items-center justify-center relative"
         >
           <Link
-            href={`/${locale}#work`}
+            href={`/${locale}/work`}
             className="group relative w-[55%] md:w-[50%] aspect-[3/4] cursor-pointer"
           >
             {/* Layer 5 (back) - dark */}

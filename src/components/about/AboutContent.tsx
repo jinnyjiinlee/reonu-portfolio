@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { Dictionary } from "@/types/dictionary";
+import { liveProjects } from "@/data/projects";
 
 interface AboutContentProps {
   locale: string;
@@ -91,7 +92,7 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
                 </div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-accent">24+</div>
+                <div className="text-3xl font-bold text-accent">{liveProjects.length}+</div>
                 <div className="mt-1 text-xs uppercase tracking-wider text-text-muted">
                   {dict.about.projectsDone}
                 </div>

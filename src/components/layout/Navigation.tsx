@@ -19,7 +19,7 @@ export function Navigation({ locale, dict }: NavigationProps) {
   const switchedPath = pathname.replace(`/${locale}`, `/${switchedLocale}`);
 
   const navLinks = [
-    { href: `/${locale}#work`, label: dict.nav.work },
+    { href: `/${locale}/work`, label: dict.nav.work },
     { href: `/${locale}/about`, label: dict.nav.about },
     { href: `/${locale}/contact`, label: dict.nav.contact },
   ];

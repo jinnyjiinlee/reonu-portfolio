@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { locales } from "@/lib/getDictionary";
 import { getDictionary } from "@/lib/getDictionary";
@@ -13,6 +14,40 @@ const inter = Inter({
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isKo = locale === "ko";
+
+  const title = isKo
+    ? "REONU® 디자인 스튜디오"
+    : "REONU® Design Studio";
+  const description = isKo
+    ? "REONU®는 브랜드와 디지털 경험을 설계하는 디자인 스튜디오입니다. 브랜딩, UX·UI, 편집 디자인을 아우릅니다."
+    : "REONU® is a design studio shaping brand and digital experiences across identity, UX/UI, and editorial design.";
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        ko: "/ko",
+        en: "/en",
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      locale: isKo ? "ko_KR" : "en_US",
+      url: `/${locale}`,
+    },
+  };
 }
 
 export default async function LocaleLayout({

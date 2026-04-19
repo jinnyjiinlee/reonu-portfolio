@@ -1,35 +1,65 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import type { Dictionary } from "@/types/dictionary";
+import { contactContent } from "@/data/contactForm";
+import { FormField } from "./FormField";
 
 interface ContactContentProps {
   locale: string;
   dict: Dictionary;
 }
 
+type FormValues = Record<string, string | boolean>;
+
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+
 export function ContactContent({ locale, dict }: ContactContentProps) {
+  const lang = locale as "ko" | "en";
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const initialValues = useMemo<FormValues>(() => {
+    const v: FormValues = {};
+    for (const f of contactContent.fields) {
+      v[f.id] = f.type === "checkbox" ? false : "";
+    }
+    return v;
+  }, []);
+
+  const [values, setValues] = useState<FormValues>(initialValues);
+
+  function handleChange(id: string, value: string | boolean) {
+    setValues((prev) => ({ ...prev, [id]: value }));
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
+    setErrorMsg(null);
 
-    const form = e.currentTarget;
-    const data = new FormData(form);
+    const body = new FormData();
+    for (const [k, v] of Object.entries(values)) {
+      body.append(k, typeof v === "boolean" ? String(v) : v);
+    }
 
     try {
-      await fetch("https://formspree.io/f/placeholder", {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      });
+      if (FORMSPREE_ID) {
+        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: "POST",
+          body,
+          headers: { Accept: "application/json" },
+        });
+        if (!res.ok) throw new Error("submit failed");
+      } else {
+        await new Promise((r) => setTimeout(r, 400));
+      }
       setSubmitted(true);
-      form.reset();
+      setValues(initialValues);
     } catch {
-      // Silently handle - Formspree ID needs to be configured
+      setErrorMsg(dict.contact.error);
     } finally {
       setLoading(false);
     }
@@ -37,7 +67,6 @@ export function ContactContent({ locale, dict }: ContactContentProps) {
 
   return (
     <div className="pt-20">
-      {/* Hero */}
       <section className="min-h-[40vh] flex items-end px-5 md:px-10 pb-12 md:pb-20">
         <div className="max-w-[1200px] w-full mx-auto">
           <motion.div
@@ -49,19 +78,19 @@ export function ContactContent({ locale, dict }: ContactContentProps) {
               {dict.contact.title}
             </span>
             <h1 className="mt-4 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              {dict.contact.cta}
+              {contactContent.header.title[lang]}
             </h1>
-            <p className="mt-4 text-lg text-text-secondary max-w-lg">
-              {dict.contact.ctaDesc}
-            </p>
+            <div className="mt-4 text-lg text-text-secondary max-w-lg">
+              {contactContent.header.description[lang].map((line, i) => (
+                <p key={i}>{line}</p>
+              ))}
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Form + Info */}
       <section className="py-16 md:py-24 px-5 md:px-10">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20">
-          {/* Form */}
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_320px] gap-16 md:gap-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -69,69 +98,38 @@ export function ContactContent({ locale, dict }: ContactContentProps) {
             transition={{ duration: 0.6 }}
           >
             {submitted ? (
-              <div className="py-12 text-center">
+              <div className="py-12">
                 <div className="text-4xl mb-4">&#10003;</div>
                 <p className="text-lg font-medium">{dict.contact.success}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">
-                    {dict.contact.name}
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    className="w-full border-b border-border bg-transparent py-3 text-base focus:outline-none focus:border-foreground transition-colors"
+                {contactContent.fields.map((field) => (
+                  <FormField
+                    key={field.id}
+                    field={field}
+                    value={values[field.id]}
+                    onChange={handleChange}
+                    locale={lang}
                   />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">
-                    {dict.contact.email}
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full border-b border-border bg-transparent py-3 text-base focus:outline-none focus:border-foreground transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">
-                    {dict.contact.subject}
-                  </label>
-                  <input
-                    type="text"
-                    name="subject"
-                    required
-                    className="w-full border-b border-border bg-transparent py-3 text-base focus:outline-none focus:border-foreground transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-text-muted mb-2">
-                    {dict.contact.message}
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={5}
-                    required
-                    className="w-full border-b border-border bg-transparent py-3 text-base focus:outline-none focus:border-foreground transition-colors resize-none"
-                  />
-                </div>
+                ))}
+
+                {errorMsg && (
+                  <p className="text-sm text-accent">{errorMsg}</p>
+                )}
+
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-foreground text-white text-sm font-medium uppercase tracking-widest rounded-full hover:bg-accent transition-colors duration-300 disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-foreground text-white text-sm font-medium uppercase tracking-widest rounded-full disabled:opacity-50"
                 >
-                  {loading ? "..." : dict.contact.send}
+                  {loading ? "..." : contactContent.submit[lang]}
                   <span>&rarr;</span>
                 </button>
               </form>
             )}
           </motion.div>
 
-          {/* Contact info */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -141,16 +139,15 @@ export function ContactContent({ locale, dict }: ContactContentProps) {
           >
             <div>
               <h3 className="text-xs uppercase tracking-widest text-text-muted mb-3">
-                Email
+                {dict.contact.email}
               </h3>
               <a
                 href="mailto:reonustudio@gmail.com"
-                className="text-base font-medium hover:text-accent transition-colors"
+                className="text-base font-medium"
               >
                 reonustudio@gmail.com
               </a>
             </div>
-
             <div>
               <h3 className="text-xs uppercase tracking-widest text-text-muted mb-3">
                 {dict.contact.phone}
@@ -160,34 +157,18 @@ export function ContactContent({ locale, dict }: ContactContentProps) {
                 <p className="text-base font-medium">+82 10 7709 7124</p>
               </div>
             </div>
-
             <div>
               <h3 className="text-xs uppercase tracking-widest text-text-muted mb-3">
                 Social
               </h3>
               <div className="space-y-2">
-                <a
-                  href="https://instagram.com/reonustudio"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-base font-medium hover:text-accent transition-colors"
-                >
+                <a href="https://instagram.com/reonustudio" target="_blank" rel="noopener noreferrer" className="block text-base font-medium">
                   Instagram
                 </a>
-                <a
-                  href="https://behance.net/reonustudio"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-base font-medium hover:text-accent transition-colors"
-                >
+                <a href="https://behance.net/reonustudio" target="_blank" rel="noopener noreferrer" className="block text-base font-medium">
                   Behance
                 </a>
-                <a
-                  href="https://linkedin.com/in/reonustudio"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block text-base font-medium hover:text-accent transition-colors"
-                >
+                <a href="https://linkedin.com/in/reonustudio" target="_blank" rel="noopener noreferrer" className="block text-base font-medium">
                   LinkedIn
                 </a>
               </div>

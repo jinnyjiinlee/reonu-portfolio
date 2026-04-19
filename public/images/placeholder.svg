@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1a2e"/>
+      <stop offset="1" stop-color="#323adc"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#g)"/>
+  <g fill="#ffffff" opacity="0.18" font-family="Helvetica, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="600" y="470" font-size="72" letter-spacing="8">REONU</text>
+    <text x="600" y="540" font-size="22" letter-spacing="12">COMING SOON</text>
+  </g>
+</svg>

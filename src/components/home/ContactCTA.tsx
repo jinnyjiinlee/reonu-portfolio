@@ -20,20 +20,15 @@ export function ContactCTA({ locale, dict }: ContactCTAProps) {
           transition={{ duration: 0.6 }}
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-8"
         >
-          <div>
-            <p className="text-sm text-text-muted leading-relaxed max-w-sm">
-              {dict.contact.ctaDesc}
-            </p>
-            <h2 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              {dict.contact.cta}
-            </h2>
-          </div>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+            {dict.contact.cta}
+          </h2>
 
           <Link
             href={`/${locale}/contact`}
-            className="inline-flex items-center gap-3 text-lg font-bold text-foreground hover:text-accent transition-colors group"
+            className="inline-flex items-center gap-3 text-lg font-bold text-foreground group"
           >
-            {dict.services.cta}
+            {dict.contact.title}
             <span className="text-2xl group-hover:translate-x-2 transition-transform">
               &rarr;
             </span>

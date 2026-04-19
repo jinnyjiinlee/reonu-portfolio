@@ -14,31 +14,16 @@ export interface Dictionary {
   };
   services: {
     title: string;
-    cta: string;
-    ctaDesc: string;
-    uxui: {
-      title: string;
-      desc: string;
-      tags: string[];
-    };
-    bx: {
-      title: string;
-      desc: string;
-      tags: string[];
-    };
-    edit: {
-      title: string;
-      desc: string;
-      tags: string[];
-    };
   };
   projects: {
     title: string;
+    counterLabel: string;
     all: string;
     uxui: string;
-    bx: string;
-    edit: string;
+    branding: string;
+    editorial: string;
     viewProject: string;
+    viewAll: string;
   };
   about: {
     title: string;
@@ -54,20 +39,17 @@ export interface Dictionary {
   contact: {
     title: string;
     cta: string;
-    ctaDesc: string;
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-    send: string;
     success: string;
+    error: string;
     phone: string;
+    email: string;
   };
   footer: {
     copyright: string;
   };
   work: {
-    client: string;
+    title: string;
+    intro: string;
     category: string;
     year: string;
     role: string;

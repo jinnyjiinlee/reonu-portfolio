@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { projects } from "@/data/projects";
+import { liveProjects } from "@/data/projects";
 
 export function ProjectCounter() {
   return (
@@ -15,11 +15,8 @@ export function ProjectCounter() {
           className="text-center"
         >
           <span className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black leading-none tracking-tighter text-foreground">
-            {projects.length}
+            {liveProjects.length}
           </span>
-          <p className="text-sm md:text-base text-text-muted uppercase tracking-[0.3em] mt-2">
-            Projects Completed
-          </p>
         </motion.div>
       </div>
     </section>

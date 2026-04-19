@@ -5,6 +5,8 @@ import { Statement } from "@/components/home/Statement";
 import { ProjectCounter } from "@/components/home/ProjectCounter";
 import { FeaturedWork } from "@/components/home/FeaturedWork";
 import { Services } from "@/components/home/Services";
+import { Process } from "@/components/home/Process";
+import { Pricing } from "@/components/home/Pricing";
 import { Partners } from "@/components/home/Partners";
 import { ContactCTA } from "@/components/home/ContactCTA";
 
@@ -24,6 +26,8 @@ export default async function HomePage({
       <ProjectCounter />
       <FeaturedWork locale={locale} dict={dict} />
       <Services locale={locale} dict={dict} />
+      <Process locale={locale} />
+      <Pricing locale={locale} />
       <Partners />
       <ContactCTA locale={locale} dict={dict} />
     </>
