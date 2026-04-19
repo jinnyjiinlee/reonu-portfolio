@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Dictionary } from "@/types/dictionary";
 import { liveProjects } from "@/data/projects";
@@ -8,6 +9,19 @@ interface AboutContentProps {
   locale: string;
   dict: Dictionary;
 }
+
+const founders = [
+  {
+    src: "/images/profile/profile-01.jpg",
+    name: "HYERI GWON",
+    role: { ko: "공동대표 · 디자이너", en: "Founder · Designer" },
+  },
+  {
+    src: "/images/profile/profile-02.jpg",
+    name: "SINJUN PARK",
+    role: { ko: "공동대표 · 운영", en: "Founder · Operations" },
+  },
+];
 
 const skills = [
   "UI/UX Design",
@@ -23,7 +37,7 @@ const skills = [
 const experience = [
   {
     period: "2025 - Present",
-    role: { ko: "REONU DESIGN STUDIO 대표", en: "REONU DESIGN STUDIO Founder" },
+    role: { ko: "REONU DESIGN STUDIO 공동대표 · 디자이너", en: "REONU DESIGN STUDIO Co-Founder · Designer" },
     desc: { ko: "브랜드 & 프로덕트 디자인 스튜디오 운영", en: "Brand & Product Design Studio" },
   },
   {
@@ -65,8 +79,16 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {/* Profile placeholder */}
-            <div className="w-full aspect-[3/4] bg-gradient-to-br from-accent/20 to-accent/5 rounded-sm" />
+            <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm bg-surface">
+              <Image
+                src="/images/profile/profile-03.jpg"
+                alt="Hyeri Gwon"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+                priority
+              />
+            </div>
           </motion.div>
 
           <motion.div
@@ -122,6 +144,34 @@ export function AboutContent({ locale, dict }: AboutContentProps) {
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
             </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Founders */}
+      <section className="py-16 md:py-24 px-5 md:px-10">
+        <div className="max-w-[1200px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10"
+          >
+            {founders.map((f) => (
+              <div
+                key={f.name}
+                className="relative aspect-[3/4] overflow-hidden rounded-sm bg-surface"
+              >
+                <Image
+                  src={f.src}
+                  alt={`${f.name} — ${f.role[lang]}`}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            ))}
           </motion.div>
         </div>
       </section>
