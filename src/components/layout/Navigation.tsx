@@ -30,23 +30,14 @@ export function Navigation({ locale, dict }: NavigationProps) {
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 h-full flex items-center justify-between">
         {/* Logo */}
         <Link href={`/${locale}`} aria-label="REONU Home" className="flex items-center">
-          {/* Mobile: symbol only */}
+          {/* Wordmark-only logo (mobile + desktop) */}
           <Image
-            src="/images/logo/logo-03.png"
+            src="/images/logo/logo-01.png"
             alt="REONU"
-            width={240}
-            height={240}
+            width={1200}
+            height={300}
             priority
-            className="sm:hidden w-20 h-20"
-          />
-          {/* Desktop: symbol + wordmark */}
-          <Image
-            src="/images/logo/logo-02.png"
-            alt="REONU"
-            width={1000}
-            height={250}
-            priority
-            className="hidden sm:block h-20 md:h-28 w-auto"
+            className="h-14 sm:h-16 md:h-20 w-auto"
           />
         </Link>
 

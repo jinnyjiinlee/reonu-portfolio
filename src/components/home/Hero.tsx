@@ -177,7 +177,7 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="text-[3.5rem] sm:text-[5rem] md:text-[7.5rem] lg:text-[9.5rem] xl:text-[11.5rem] font-black leading-[0.85] tracking-tighter text-foreground"
           >
-            REONU<span className="text-accent">®</span>
+            REONU
           </motion.h1>
 
           <motion.div

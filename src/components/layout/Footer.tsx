@@ -17,11 +17,11 @@ export function Footer({ locale, dict }: FooterProps) {
         <div className="flex flex-col items-center md:items-start gap-3">
           <Link href={`/${locale}`} aria-label="REONU Home">
             <Image
-              src="/images/logo/logo-02.png"
+              src="/images/logo/logo-01.png"
               alt="REONU"
-              width={600}
-              height={150}
-              className="h-9 md:h-10 w-auto"
+              width={800}
+              height={200}
+              className="h-7 md:h-8 w-auto"
             />
           </Link>
           <p className="text-[11px] text-text-muted text-center md:text-left">

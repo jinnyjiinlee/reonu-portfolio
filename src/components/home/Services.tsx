@@ -55,7 +55,7 @@ export function Services({ locale, dict }: ServicesProps) {
                 {tier.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-5 py-2.5 text-sm bg-foreground text-white rounded-full"
+                    className="px-5 py-2.5 text-sm bg-accent text-white rounded-full"
                   >
                     {tag}
                   </span>
