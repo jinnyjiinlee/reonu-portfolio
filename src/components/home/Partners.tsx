@@ -70,7 +70,7 @@ export function Partners() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border overflow-hidden rounded-sm">
+        <div className="grid grid-cols-2 md:grid-cols-4">
           {partners.map((partner, i) => (
             <motion.div
               key={`${partner.name}-${i}`}
@@ -78,24 +78,24 @@ export function Partners() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="group relative bg-background h-28 md:h-36 flex items-center justify-center overflow-hidden"
+              className="group relative h-24 md:h-32 flex items-center justify-center"
             >
               {partner.logo ? (
                 <>
-                  <div className="absolute inset-0 flex items-center justify-center px-6 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-2">
+                  <div className="absolute inset-0 flex items-center justify-center px-6 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={partner.logo}
                       alt={partner.name}
-                      className={`${partner.heightClass} w-auto max-w-[70%] object-contain grayscale opacity-60 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100`}
+                      className={`${partner.heightClass} w-auto max-w-[70%] object-contain grayscale opacity-50 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100`}
                     />
                   </div>
-                  <span className="absolute inset-0 flex items-center justify-center text-sm md:text-base font-semibold tracking-tight text-foreground opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                  <span className="absolute inset-0 flex items-center justify-center text-sm md:text-base font-semibold tracking-tight text-foreground opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
                     {partner.name}
                   </span>
                 </>
               ) : (
-                <span className="text-sm md:text-base font-semibold tracking-tight text-text-secondary transition-colors duration-300 group-hover:text-foreground">
+                <span className="text-sm md:text-base font-semibold tracking-tight text-text-muted transition-colors duration-300 group-hover:text-foreground">
                   {partner.name}
                 </span>
               )}
