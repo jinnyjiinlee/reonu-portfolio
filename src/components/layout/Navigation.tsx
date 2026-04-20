@@ -102,7 +102,7 @@ export function Navigation({ locale, dict }: NavigationProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden absolute top-16 left-0 right-0 bg-white border-b border-border"
+            className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-border"
           >
             <nav className="flex flex-col px-5 py-6 gap-4">
               {navLinks.map((link) => (
