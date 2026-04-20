@@ -8,7 +8,7 @@ import { Services } from "@/components/home/Services";
 import { Process } from "@/components/home/Process";
 import { Pricing } from "@/components/home/Pricing";
 import { Partners } from "@/components/home/Partners";
-import { ContactCTA } from "@/components/home/ContactCTA";
+import { HomeContact } from "@/components/home/HomeContact";
 
 export default async function HomePage({
   params,
@@ -29,7 +29,7 @@ export default async function HomePage({
       <Process locale={locale} />
       <Pricing locale={locale} />
       <Partners />
-      <ContactCTA locale={locale} dict={dict} />
+      <HomeContact locale={locale} dict={dict} />
     </>
   );
 }
