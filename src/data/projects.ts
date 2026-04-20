@@ -427,27 +427,37 @@ const imagePath = (folderName: string, file: string) =>
 
 const PLACEHOLDER = "/images/placeholder.svg";
 
-// Flip to true per-project once real assets are placed in public/images/projects/<folderName>/.
-const assetsReadySlugs = new Set<string>([
-  "kt-momo",
-  "lotte-wonder",
-  "shinhan-card-sol",
-  "kb-securities",
-  "cj-onstyle",
-  "lash-website",
-  "reonu-branding",
-  "dayfocus-lab",
-  "tripick",
-  "moe-mental-health",
-  "kookmin-gsd",
-  "shinhan-asset",
-  "onsaemiro",
-  "mountain-film-festival",
-]);
+// Count of extra gallery details (detail-02.jpg ... detail-0N.jpg) per slug.
+// 0 means cover-only. Slugs absent from this map render a placeholder.
+const galleryDetailCount: Record<string, number> = {
+  "kt-momo": 4,
+  "lotte-wonder": 3,
+  "shinhan-card-sol": 1,
+  "shinhan-asset": 3,
+  "kb-securities": 2,
+  "cj-onstyle": 1,
+  "lash-website": 2,
+  "reonu-branding": 3,
+  "dayfocus-lab": 1,
+  "onsaemiro": 3,
+  "tripick": 2,
+  "moe-mental-health": 2,
+  "mountain-film-festival": 0,
+  "kookmin-gsd": 4,
+};
 
 export const projects: Project[] = rawProjects.map((p, idx) => {
-  const ready = assetsReadySlugs.has(p.slug);
-  const thumb = ready ? imagePath(p.folderName, p.thumbnailFile) : PLACEHOLDER;
+  const extras = galleryDetailCount[p.slug];
+  const ready = extras !== undefined;
+  const cover = imagePath(p.folderName, p.thumbnailFile);
+  const gallery = ready
+    ? [
+        cover,
+        ...Array.from({ length: extras }, (_, i) =>
+          imagePath(p.folderName, `detail-0${i + 2}.jpg`),
+        ),
+      ]
+    : [];
   return {
     id: p.id,
     slug: p.slug,
@@ -457,8 +467,8 @@ export const projects: Project[] = rawProjects.map((p, idx) => {
     category: p.category,
     categoryLabel: CATEGORY_LABEL[p.category],
     folderName: p.folderName,
-    thumbnail: thumb,
-    images: ready ? [imagePath(p.folderName, p.thumbnailFile)] : [],
+    thumbnail: ready ? cover : PLACEHOLDER,
+    images: gallery,
     displayOrder: p.displayOrder,
     status: p.status,
     description: { ko: p.subtitleKo, en: p.subtitleEn },
