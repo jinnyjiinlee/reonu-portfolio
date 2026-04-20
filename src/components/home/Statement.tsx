@@ -1,33 +1,80 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import type { Dictionary } from "@/types/dictionary";
 
 interface StatementProps {
   dict: Dictionary;
 }
 
-export function Statement({ dict }: StatementProps) {
+function Word({
+  word,
+  progress,
+  range,
+}: {
+  word: string;
+  progress: MotionValue<number>;
+  range: [number, number];
+}) {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+  const y = useTransform(progress, range, [12, 0]);
   return (
-    <section className="py-32 md:py-48 px-5 md:px-10">
-      <div className="max-w-[1400px] mx-auto">
-        {/* Large statement text */}
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] xl:text-[7.5rem] font-bold leading-[1.05] tracking-tight text-foreground"
-        >
-          {dict.statement.text}
-        </motion.h2>
+    <motion.span
+      style={{ opacity, y }}
+      className="inline-block mr-[0.2em]"
+    >
+      {word}
+    </motion.span>
+  );
+}
 
-        {/* Body paragraph */}
+export function Statement({ dict }: StatementProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 85%", "end 50%"],
+  });
+
+  const barScaleX = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
+  const words = dict.statement.text.split(/\s+/);
+
+  return (
+    <section
+      ref={ref}
+      className="py-32 md:py-48 px-5 md:px-10 relative overflow-hidden"
+    >
+      <div className="max-w-[1400px] mx-auto">
+        <motion.div
+          style={{ scaleX: barScaleX }}
+          className="h-px bg-accent origin-left w-24 md:w-40 mb-10 md:mb-14"
+        />
+
+        <h2 className="text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] xl:text-[7.5rem] font-bold leading-[1.05] tracking-tight text-foreground">
+          {words.map((word, i) => {
+            const start = (i / words.length) * 0.9;
+            const end = ((i + 1) / words.length) * 0.9;
+            return (
+              <Word
+                key={`${word}-${i}`}
+                word={word}
+                progress={scrollYProgress}
+                range={[start, end]}
+              />
+            );
+          })}
+        </h2>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 md:mt-24 max-w-2xl ml-auto text-base md:text-lg text-text-secondary leading-relaxed"
         >
           {dict.statement.body}

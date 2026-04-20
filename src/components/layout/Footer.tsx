@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Dictionary } from "@/types/dictionary";
 
 interface FooterProps {
@@ -11,49 +10,65 @@ export function Footer({ locale, dict }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="px-5 md:px-10 py-10 md:py-12 border-t border-border">
-      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center md:items-start md:justify-between gap-8 md:gap-6">
-        {/* Left: Logo + copyright */}
-        <div className="flex flex-col items-center md:items-start gap-3">
-          <Link href={`/${locale}`} aria-label="REONU Home">
-            <Image
-              src="/images/logo/logo-01.png"
-              alt="REONU"
-              width={800}
-              height={200}
-              className="h-7 md:h-8 w-auto"
-            />
-          </Link>
-          <p className="text-[11px] text-text-muted text-center md:text-left">
-            &copy; {currentYear} {dict.footer.copyright}
-          </p>
-          <p className="text-[11px] text-text-muted text-center md:text-left">
-            사업자등록번호 510-56-00862
-          </p>
+    <footer className="relative border-t border-border overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-16 md:pt-24 pb-8">
+        {/* Top: columns */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+          <div className="col-span-2 md:col-span-2">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-text-muted mb-3">
+              Studio
+            </p>
+            <p className="text-base md:text-lg text-foreground max-w-md leading-relaxed">
+              REONU는 브랜드와 디지털 경험을 설계하는 서울 기반 디자인 스튜디오입니다.
+            </p>
+          </div>
+
+          <nav className="flex flex-col gap-3">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-text-muted mb-1">
+              Navigate
+            </p>
+            <Link href={`/${locale}/work`} className="text-sm text-foreground hover:text-accent transition-colors">
+              {dict.nav.work}
+            </Link>
+            <Link href={`/${locale}/about`} className="text-sm text-foreground hover:text-accent transition-colors">
+              {dict.nav.about}
+            </Link>
+            <Link href={`/${locale}/contact`} className="text-sm text-foreground hover:text-accent transition-colors">
+              {dict.nav.contact}
+            </Link>
+          </nav>
+
+          <div className="flex flex-col gap-3">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-text-muted mb-1">
+              Contact
+            </p>
+            <a
+              href="mailto:reonustudio@gmail.com"
+              className="text-sm text-foreground hover:text-accent transition-colors break-all"
+            >
+              reonustudio@gmail.com
+            </a>
+            <p className="text-sm text-text-muted">Seoul, Korea</p>
+          </div>
         </div>
 
-        {/* Center: Nav links */}
-        <nav className="flex flex-wrap justify-center gap-5 md:gap-6">
-          <Link
-            href={`/${locale}/work`}
-            className="text-xs text-text-muted hover:text-foreground transition-colors uppercase tracking-wider"
+        {/* Giant wordmark */}
+        <div className="mt-14 md:mt-20 -mb-4 md:-mb-8 select-none pointer-events-none">
+          <h2
+            aria-hidden
+            className="text-[22vw] md:text-[18vw] lg:text-[16vw] font-black leading-[0.82] tracking-tighter text-foreground/[0.08]"
           >
-            {dict.nav.work}
-          </Link>
-          <Link
-            href={`/${locale}/about`}
-            className="text-xs text-text-muted hover:text-foreground transition-colors uppercase tracking-wider"
-          >
-            {dict.nav.about}
-          </Link>
-          <Link
-            href={`/${locale}/contact`}
-            className="text-xs text-text-muted hover:text-foreground transition-colors uppercase tracking-wider"
-          >
-            {dict.nav.contact}
-          </Link>
-        </nav>
+            REONU
+          </h2>
+        </div>
 
+        {/* Bottom bar */}
+        <div className="mt-10 md:mt-12 pt-6 border-t border-border flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-[11px] text-text-muted">
+          <p>
+            &copy; {currentYear} {dict.footer.copyright}
+          </p>
+          <p>사업자등록번호 510-56-00862</p>
+        </div>
       </div>
     </footer>
   );
