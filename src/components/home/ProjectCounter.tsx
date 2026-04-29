@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { liveProjects } from "@/data/projects";
+import { easeOut } from "@/lib/motion";
 
 interface ProjectCounterProps {
   locale: string;
@@ -20,8 +21,8 @@ export function ProjectCounter({ locale }: ProjectCounterProps) {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-black leading-none tracking-tighter text-foreground group-hover:text-accent transition-colors duration-500"
+            transition={{ duration: 0.8, ease: easeOut }}
+            className="text-8xl md:text-9xl lg:text-display font-black leading-none tracking-tighter text-foreground group-hover:text-accent transition-colors duration-500"
           >
             {liveProjects.length}
           </motion.span>

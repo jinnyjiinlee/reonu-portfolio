@@ -15,7 +15,7 @@ export function Footer({ locale, dict }: FooterProps) {
         {/* Top: columns */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
           <div className="col-span-2 md:col-span-2">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-text-muted mb-3">
+            <p className="text-xs uppercase tracking-[0.22em] text-text-muted mb-3">
               Studio
             </p>
             <p className="text-base md:text-lg text-foreground max-w-md leading-relaxed">
@@ -24,14 +24,14 @@ export function Footer({ locale, dict }: FooterProps) {
           </div>
 
           <nav className="flex flex-col gap-3">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-text-muted mb-1">
+            <p className="text-xs uppercase tracking-[0.22em] text-text-muted mb-1">
               Navigate
             </p>
             <Link href={`/${locale}/work`} className="text-sm text-foreground hover:text-accent transition-colors">
               {dict.nav.work}
             </Link>
-            <Link href={`/${locale}/about`} className="text-sm text-foreground hover:text-accent transition-colors">
-              {dict.nav.about}
+            <Link href={`/${locale}/studio`} className="text-sm text-foreground hover:text-accent transition-colors">
+              {dict.nav.studio}
             </Link>
             <Link href={`/${locale}/contact`} className="text-sm text-foreground hover:text-accent transition-colors">
               {dict.nav.contact}
@@ -39,7 +39,7 @@ export function Footer({ locale, dict }: FooterProps) {
           </nav>
 
           <div className="flex flex-col gap-3">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-text-muted mb-1">
+            <p className="text-xs uppercase tracking-[0.22em] text-text-muted mb-1">
               Contact
             </p>
             <a
@@ -48,7 +48,6 @@ export function Footer({ locale, dict }: FooterProps) {
             >
               reonustudio@gmail.com
             </a>
-            <p className="text-sm text-text-muted">Seoul, Korea</p>
           </div>
         </div>
 
@@ -63,7 +62,7 @@ export function Footer({ locale, dict }: FooterProps) {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 md:mt-12 pt-6 border-t border-border flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-[11px] text-text-muted">
+        <div className="mt-10 md:mt-12 pt-6 border-t border-border flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-text-muted">
           <p>
             &copy; {currentYear} {dict.footer.copyright}
           </p>

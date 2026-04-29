@@ -1,7 +1,7 @@
 import { getDictionary } from "@/lib/getDictionary";
-import { AboutContent } from "@/components/about/AboutContent";
+import { StudioContent } from "@/components/studio/StudioContent";
 
-export default async function AboutPage({
+export default async function StudioPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -9,5 +9,5 @@ export default async function AboutPage({
   const { locale } = await params;
   const dict = await getDictionary(locale);
 
-  return <AboutContent locale={locale} dict={dict} />;
+  return <StudioContent locale={locale} dict={dict} />;
 }

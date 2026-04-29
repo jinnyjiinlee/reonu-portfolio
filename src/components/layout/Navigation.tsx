@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import type { Dictionary } from "@/types/dictionary";
+import { MenuButton, MobileMenu, type NavLink } from "./MobileMenu";
 
 interface NavigationProps {
   locale: string;
@@ -27,9 +27,9 @@ export function Navigation({ locale, dict }: NavigationProps) {
   const switchedLocale = locale === "ko" ? "en" : "ko";
   const switchedPath = pathname.replace(`/${locale}`, `/${switchedLocale}`);
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { href: `/${locale}/work`, label: dict.nav.work },
-    { href: `/${locale}/about`, label: dict.nav.about },
+    { href: `/${locale}/studio`, label: dict.nav.studio },
     { href: `/${locale}/contact`, label: dict.nav.contact },
   ];
 
@@ -47,8 +47,11 @@ export function Navigation({ locale, dict }: NavigationProps) {
       }`}
     >
       <div className="max-w-[1400px] mx-auto px-5 md:px-10 h-full flex items-center justify-between">
-        {/* Logo */}
-        <Link href={`/${locale}`} aria-label="REONU Home" className="flex items-center">
+        <Link
+          href={`/${locale}`}
+          aria-label="REONU Home"
+          className="flex items-center"
+        >
           <Image
             src="/images/logo/logo-01.png"
             alt="REONU"
@@ -61,7 +64,6 @@ export function Navigation({ locale, dict }: NavigationProps) {
           />
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => {
             const active = isActive(link.href);
@@ -83,7 +85,6 @@ export function Navigation({ locale, dict }: NavigationProps) {
             );
           })}
 
-          {/* Language Toggle */}
           <Link
             href={switchedPath}
             className="text-xs font-medium text-text-muted hover:text-foreground transition-colors uppercase tracking-widest"
@@ -92,68 +93,20 @@ export function Navigation({ locale, dict }: NavigationProps) {
           </Link>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          aria-label="Toggle menu"
-        >
-          <motion.span
-            animate={mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-            className="block w-5 h-[1.5px] bg-foreground origin-center"
-          />
-          <motion.span
-            animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-            className="block w-5 h-[1.5px] bg-foreground"
-          />
-          <motion.span
-            animate={
-              mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }
-            }
-            className="block w-5 h-[1.5px] bg-foreground origin-center"
-          />
-        </button>
+        <MenuButton
+          open={mobileOpen}
+          onToggle={() => setMobileOpen((v) => !v)}
+        />
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-border"
-          >
-            <nav className="flex flex-col px-5 py-6 gap-4">
-              {navLinks.map((link) => {
-                const active = isActive(link.href);
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`text-base font-medium transition-colors uppercase tracking-wider ${
-                      active
-                        ? "text-foreground"
-                        : "text-text-muted hover:text-foreground"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-              <Link
-                href={switchedPath}
-                onClick={() => setMobileOpen(false)}
-                className="text-sm font-medium text-text-muted hover:text-accent transition-colors uppercase tracking-widest"
-              >
-                {switchedLocale === "ko" ? "한국어" : "English"}
-              </Link>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <MobileMenu
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        navLinks={navLinks}
+        isActive={isActive}
+        switchedPath={switchedPath}
+        switchedLocale={switchedLocale as "ko" | "en"}
+      />
     </header>
   );
 }

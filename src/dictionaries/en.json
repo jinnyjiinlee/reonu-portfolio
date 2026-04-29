@@ -1,7 +1,7 @@
 {
   "nav": {
     "work": "Work",
-    "about": "About",
+    "studio": "Studio",
     "contact": "Contact"
   },
   "hero": {
@@ -17,7 +17,6 @@
   },
   "projects": {
     "title": "Selected Work",
-    "counterLabel": "Completed Projects",
     "all": "All",
     "uxui": "UX/UI",
     "branding": "Branding",
@@ -25,23 +24,17 @@
     "viewProject": "View Project",
     "viewAll": "View All"
   },
-  "about": {
-    "title": "About",
+  "studio": {
     "bio": "We are a brand design partner that works with a wide range of organizations, from large corporations to startups and public institutions. By connecting strategy and design, we work quickly and flexibly to build sustainable brand systems.",
     "yearsExp": "Years Exp.",
     "projectsDone": "Projects",
     "categories": "Specialties",
-    "viewMore": "View More",
-    "downloadResume": "Download Company Profile",
-    "skills": "Skills",
-    "experience": "Experience"
+    "downloadResume": "Download Company Profile"
   },
   "contact": {
     "title": "Contact",
-    "cta": "Let's Work Together",
     "success": "Your inquiry has been sent. Thank you.",
     "error": "Something went wrong. Please try again shortly.",
-    "phone": "Phone",
     "email": "Email"
   },
   "footer": {

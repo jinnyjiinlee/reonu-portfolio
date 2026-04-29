@@ -12,6 +12,22 @@
 
   --font-sans: "Inter", "Pretendard", -apple-system, BlinkMacSystemFont,
     sans-serif;
+
+  /* Typography scale — aligned to reference (Möbius). Single source of truth. */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 28px;
+  --text-3xl: 36px;
+  --text-4xl: 44px;
+  --text-5xl: 56px;
+  --text-6xl: 80px;
+  --text-7xl: 104px;
+  --text-8xl: 120px;
+  --text-9xl: 160px;
+  --text-display: 200px;
 }
 
 html {

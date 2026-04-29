@@ -1,7 +1,7 @@
 {
   "nav": {
     "work": "Work",
-    "about": "About",
+    "studio": "Studio",
     "contact": "Contact"
   },
   "hero": {
@@ -17,7 +17,6 @@
   },
   "projects": {
     "title": "Selected Work",
-    "counterLabel": "Completed Projects",
     "all": "All",
     "uxui": "UX·UI",
     "branding": "Branding",
@@ -25,23 +24,17 @@
     "viewProject": "프로젝트 보기",
     "viewAll": "전체 보기"
   },
-  "about": {
-    "title": "About",
+  "studio": {
     "bio": "대기업부터 스타트업, 공공기관까지 다양한 조직과 협업해온 브랜드 설계 파트너입니다. 기획·디자인을 통합적으로 연결해 빠르고 유연하게 실행하며, 지속 가능한 브랜드 시스템을 만듭니다.",
     "yearsExp": "년 경력",
     "projectsDone": "프로젝트",
     "categories": "전문 분야",
-    "viewMore": "더 보기",
-    "downloadResume": "기업소개서 다운로드",
-    "skills": "전문 기술",
-    "experience": "경력"
+    "downloadResume": "기업소개서 다운로드"
   },
   "contact": {
     "title": "Contact",
-    "cta": "함께 일해요",
     "success": "문의가 정상적으로 전송되었습니다. 감사합니다.",
     "error": "전송 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.",
-    "phone": "전화",
     "email": "이메일"
   },
   "footer": {

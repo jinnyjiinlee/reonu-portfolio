@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { pricingContent, type PricingKey } from "@/data/pricing";
+import { PricingTierPanel } from "./PricingTier";
 
 interface PricingProps {
   locale: string;
@@ -43,7 +44,9 @@ export function Pricing({ locale }: PricingProps) {
             className="inline-flex items-center gap-2 mt-8 text-sm font-bold text-foreground group"
           >
             {left.cta}
-            <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+            <span className="group-hover:translate-x-1 transition-transform">
+              &rarr;
+            </span>
           </Link>
         </motion.div>
 
@@ -71,54 +74,7 @@ export function Pricing({ locale }: PricingProps) {
             })}
           </div>
 
-          <motion.div
-            key={activeTier.key}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
-              {activeTier.title}
-            </h3>
-            <div className="mt-4 text-sm md:text-base text-text-secondary leading-relaxed max-w-xl">
-              {activeTier.description[lang].map((line, i) => (
-                <p key={i}>{line}</p>
-              ))}
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-2">
-              {activeTier.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1.5 text-xs border border-border rounded-full text-text-secondary"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10 border-t border-border pt-8">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-text-muted">
-                  {labels.mainLabel}
-                </p>
-                <p className="mt-2 text-3xl md:text-4xl font-bold tracking-tight">
-                  {activeTier.mainPrice}
-                  <span className="text-sm font-medium text-text-muted ml-1">
-                    {labels.priceUnit}
-                  </span>
-                </p>
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-text-muted">
-                  {labels.secondaryLabel}
-                </p>
-                <p className="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-text-secondary">
-                  {activeTier.secondaryPrice}
-                </p>
-              </div>
-            </div>
-          </motion.div>
+          <PricingTierPanel tier={activeTier} labels={labels} lang={lang} />
         </div>
       </div>
     </section>

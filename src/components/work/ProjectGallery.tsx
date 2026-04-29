@@ -1,0 +1,48 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+import type { Project } from "@/types/project";
+
+interface ProjectGalleryProps {
+  project: Project;
+  lang: "ko" | "en";
+}
+
+export function ProjectGallery({ project, lang }: ProjectGalleryProps) {
+  return (
+    <section className="py-12 md:py-20 px-5 md:px-10">
+      <div className="max-w-[1200px] mx-auto space-y-6 md:space-y-8">
+        {project.images.length > 0
+          ? project.images.map((src, i) => (
+              <motion.div
+                key={`${src}-${i}`}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6 }}
+                className="relative w-full aspect-[16/10] md:aspect-[16/9] overflow-hidden rounded-sm bg-surface"
+              >
+                <Image
+                  src={src}
+                  alt={`${project.title[lang]} ${i + 1}`}
+                  fill
+                  sizes="(min-width: 1200px) 1200px, 100vw"
+                  className="object-cover"
+                />
+              </motion.div>
+            ))
+          : [0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6 }}
+                className="w-full aspect-video rounded-sm bg-surface"
+              />
+            ))}
+      </div>
+    </section>
+  );
+}

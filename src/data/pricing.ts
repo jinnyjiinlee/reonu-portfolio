@@ -10,6 +10,12 @@ export interface PricingTier {
   secondaryPrice: string;
 }
 
+export interface PricingLabels {
+  mainLabel: string;
+  priceUnit: string;
+  secondaryLabel: string;
+}
+
 export interface PricingContent {
   left: {
     title: string;
@@ -17,11 +23,7 @@ export interface PricingContent {
     note: { ko: string[]; en: string[] };
     cta: string;
   };
-  labels: {
-    mainLabel: string;
-    priceUnit: string;
-    secondaryLabel: string;
-  };
+  labels: PricingLabels;
   tiers: PricingTier[];
 }
 

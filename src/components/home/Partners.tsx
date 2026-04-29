@@ -5,42 +5,17 @@ import { motion } from "framer-motion";
 interface Partner {
   name: string;
   logo?: string;
-  heightClass: string; // tailwind class for logo height to normalize visual weight
 }
 
 const partners: Partner[] = [
-  { name: "KT", logo: "/images/partners/kt.svg", heightClass: "h-10 md:h-12" },
-  {
-    name: "Lotte Insurance",
-    logo: "/images/partners/lotte.svg",
-    heightClass: "h-6 md:h-7",
-  },
-  {
-    name: "Shinhan Card",
-    logo: "/images/partners/shinhan.svg",
-    heightClass: "h-5 md:h-6",
-  },
-  {
-    name: "Shinhan Asset",
-    logo: "/images/partners/shinhan-asset.svg",
-    heightClass: "h-8 md:h-10",
-  },
-  {
-    name: "KB Securities",
-    logo: "/images/partners/kb.svg",
-    heightClass: "h-7 md:h-9",
-  },
-  {
-    name: "KB Asset",
-    logo: "/images/partners/kb.svg",
-    heightClass: "h-7 md:h-9",
-  },
-  {
-    name: "CJ Onstyle",
-    logo: "/images/partners/cj.svg",
-    heightClass: "h-10 md:h-12",
-  },
-  { name: "DAYFOCUS LAB", heightClass: "h-10 md:h-12" },
+  { name: "KT", logo: "/images/partners/kt.svg" },
+  { name: "Lotte Insurance", logo: "/images/partners/lotte.svg" },
+  { name: "Shinhan Card", logo: "/images/partners/shinhan.svg" },
+  { name: "Shinhan Asset", logo: "/images/partners/shinhan-asset.svg" },
+  { name: "KB Securities", logo: "/images/partners/kb.svg" },
+  { name: "KB Asset", logo: "/images/partners/kb.svg" },
+  { name: "CJ Onstyle", logo: "/images/partners/cj.svg" },
+  { name: "DayFocusLab", logo: "/images/partners/dayfocuslab.png" },
 ];
 
 export function Partners() {
@@ -55,12 +30,6 @@ export function Partners() {
           className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
         >
           <div>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="inline-block w-8 h-px bg-accent" />
-              <span className="text-xs uppercase tracking-[0.25em] text-accent font-medium">
-                Partners
-              </span>
-            </div>
             <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
               Our Partners
             </h2>
@@ -80,25 +49,17 @@ export function Partners() {
               transition={{ duration: 0.4, delay: i * 0.05 }}
               className="group relative h-24 md:h-32 flex items-center justify-center"
             >
-              {partner.logo ? (
-                <>
-                  <div className="absolute inset-0 flex items-center justify-center px-6 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className={`${partner.heightClass} w-auto max-w-[70%] object-contain grayscale opacity-50 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100`}
-                    />
-                  </div>
-                  <span className="absolute inset-0 flex items-center justify-center text-sm md:text-base font-semibold tracking-tight text-foreground opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-                    {partner.name}
-                  </span>
-                </>
-              ) : (
-                <span className="text-sm md:text-base font-semibold tracking-tight text-text-muted transition-colors duration-300 group-hover:text-foreground">
-                  {partner.name}
-                </span>
-              )}
+              <div className="absolute inset-0 flex items-center justify-center px-4 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-1">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-7 md:h-9 w-auto max-w-full object-contain grayscale opacity-50 transition-all duration-500 group-hover:grayscale-0 group-hover:opacity-100"
+                />
+              </div>
+              <span className="absolute inset-0 flex items-center justify-center text-sm md:text-base font-semibold tracking-tight text-foreground opacity-0 translate-y-1 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                {partner.name}
+              </span>
             </motion.div>
           ))}
         </div>

@@ -1,7 +1,7 @@
 export interface Dictionary {
   nav: {
     work: string;
-    about: string;
+    studio: string;
     contact: string;
   };
   hero: {
@@ -17,7 +17,6 @@ export interface Dictionary {
   };
   projects: {
     title: string;
-    counterLabel: string;
     all: string;
     uxui: string;
     branding: string;
@@ -25,23 +24,17 @@ export interface Dictionary {
     viewProject: string;
     viewAll: string;
   };
-  about: {
-    title: string;
+  studio: {
     bio: string;
     yearsExp: string;
     projectsDone: string;
     categories: string;
-    viewMore: string;
     downloadResume: string;
-    skills: string;
-    experience: string;
   };
   contact: {
     title: string;
-    cta: string;
     success: string;
     error: string;
-    phone: string;
     email: string;
   };
   footer: {

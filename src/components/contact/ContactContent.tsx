@@ -1,69 +1,17 @@
 "use client";
 
-import { useMemo, useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import type { Dictionary } from "@/types/dictionary";
 import { contactContent } from "@/data/contactForm";
-import { FormField } from "./FormField";
+import { ConversationForm } from "./ConversationForm";
 
 interface ContactContentProps {
   locale: string;
   dict: Dictionary;
 }
 
-type FormValues = Record<string, string | boolean>;
-
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
-
 export function ContactContent({ locale, dict }: ContactContentProps) {
   const lang = locale as "ko" | "en";
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-  const initialValues = useMemo<FormValues>(() => {
-    const v: FormValues = {};
-    for (const f of contactContent.fields) {
-      v[f.id] = f.type === "checkbox" ? false : "";
-    }
-    return v;
-  }, []);
-
-  const [values, setValues] = useState<FormValues>(initialValues);
-
-  function handleChange(id: string, value: string | boolean) {
-    setValues((prev) => ({ ...prev, [id]: value }));
-  }
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    setErrorMsg(null);
-
-    const body = new FormData();
-    for (const [k, v] of Object.entries(values)) {
-      body.append(k, typeof v === "boolean" ? String(v) : v);
-    }
-
-    try {
-      if (FORMSPREE_ID) {
-        const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-          method: "POST",
-          body,
-          headers: { Accept: "application/json" },
-        });
-        if (!res.ok) throw new Error("submit failed");
-      } else {
-        await new Promise((r) => setTimeout(r, 400));
-      }
-      setSubmitted(true);
-      setValues(initialValues);
-    } catch {
-      setErrorMsg(dict.contact.error);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   return (
     <div className="pt-32 md:pt-44">
@@ -94,37 +42,7 @@ export function ContactContent({ locale, dict }: ContactContentProps) {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {submitted ? (
-              <div className="py-12">
-                <div className="text-4xl mb-4">&#10003;</div>
-                <p className="text-lg font-medium">{dict.contact.success}</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {contactContent.fields.map((field) => (
-                  <FormField
-                    key={field.id}
-                    field={field}
-                    value={values[field.id]}
-                    onChange={handleChange}
-                    locale={lang}
-                  />
-                ))}
-
-                {errorMsg && (
-                  <p className="text-sm text-accent">{errorMsg}</p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-foreground text-white text-sm font-medium uppercase tracking-widest rounded-full disabled:opacity-50"
-                >
-                  {loading ? "..." : contactContent.submit[lang]}
-                  <span>&rarr;</span>
-                </button>
-              </form>
-            )}
+            <ConversationForm locale={lang} dict={dict} />
           </motion.div>
 
           <motion.div

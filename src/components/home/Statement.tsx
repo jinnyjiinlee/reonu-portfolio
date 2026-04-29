@@ -41,7 +41,6 @@ export function Statement({ dict }: StatementProps) {
     offset: ["start 85%", "end 50%"],
   });
 
-  const barScaleX = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
   const words = dict.statement.text.split(/\s+/);
 
   return (
@@ -50,12 +49,7 @@ export function Statement({ dict }: StatementProps) {
       className="py-32 md:py-48 px-5 md:px-10 relative overflow-hidden"
     >
       <div className="max-w-[1400px] mx-auto">
-        <motion.div
-          style={{ scaleX: barScaleX }}
-          className="h-px bg-accent origin-left w-24 md:w-40 mb-10 md:mb-14"
-        />
-
-        <h2 className="text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6.5rem] xl:text-[7.5rem] font-bold leading-[1.05] tracking-tight text-foreground">
+        <h2 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] tracking-tight text-foreground">
           {words.map((word, i) => {
             const start = (i / words.length) * 0.9;
             const end = ((i + 1) / words.length) * 0.9;
