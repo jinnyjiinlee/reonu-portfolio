@@ -2,9 +2,9 @@ import type { TemplateLine } from "./types";
 
 export const koTemplate: TemplateLine[] = [
   [
-    { kind: "text", value: "안녕하세요 REONU®, 저는" },
+    { kind: "text", value: "저는" },
     { kind: "field", id: "name" },
-    { kind: "text", value: "이고" },
+    { kind: "text", value: "이고," },
     { kind: "field", id: "company" },
     { kind: "text", value: "에서 연락드립니다." },
   ],
@@ -29,7 +29,7 @@ export const koTemplate: TemplateLine[] = [
 
 export const enTemplate: TemplateLine[] = [
   [
-    { kind: "text", value: "Hi REONU®, my name is" },
+    { kind: "text", value: "My name is" },
     { kind: "field", id: "name" },
     { kind: "text", value: "and I'm writing from" },
     { kind: "field", id: "company" },
