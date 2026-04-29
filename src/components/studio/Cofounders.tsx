@@ -63,7 +63,7 @@ export function Cofounders({ lang }: CofoundersProps) {
                     className="object-contain grayscale group-hover:grayscale-0 scale-100 group-hover:scale-[1.03] transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
                   />
                   <div className="pointer-events-none absolute inset-0 mix-blend-overlay opacity-[0.05] [background-image:url('data:image/svg+xml;utf8,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22120%22%20height=%22120%22><filter%20id=%22n%22><feTurbulence%20type=%22fractalNoise%22%20baseFrequency=%220.9%22%20numOctaves=%222%22/></filter><rect%20width=%22100%25%22%20height=%22100%25%22%20filter=%22url(%23n)%22/></svg>')]" />
-                  <span className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.3em] tabular-nums text-foreground/60">
+                  <span className="absolute top-4 left-4 text-2xs uppercase tracking-[0.3em] tabular-nums text-foreground/60">
                     0{i + 1}
                   </span>
                 </div>

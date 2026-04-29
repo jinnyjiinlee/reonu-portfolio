@@ -66,7 +66,7 @@ function Stat({
           {suffix}
         </span>
       </div>
-      <div className="mt-2 text-[10px] uppercase tracking-[0.25em] text-text-muted">
+      <div className="mt-2 text-2xs uppercase tracking-[0.25em] text-text-muted">
         {label}
       </div>
     </motion.div>

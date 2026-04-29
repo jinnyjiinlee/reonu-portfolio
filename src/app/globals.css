@@ -13,7 +13,10 @@
   --font-sans: "Inter", "Pretendard", -apple-system, BlinkMacSystemFont,
     sans-serif;
 
-  /* Typography scale — aligned to reference (Möbius). Single source of truth. */
+  /* Typography scale — aligned to reference (Möbius). Single source of truth.
+     Use only these tokens; arbitrary text-[Npx] values are reserved for the
+     viewport-relative wordmarks in StudioHero and Footer. */
+  --text-2xs: 11px;
   --text-xs: 12px;
   --text-sm: 14px;
   --text-base: 16px;

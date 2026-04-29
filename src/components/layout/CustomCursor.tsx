@@ -73,7 +73,7 @@ export function CustomCursor() {
     <div
       ref={dotRef}
       aria-hidden
-      className={`pointer-events-none fixed left-0 top-0 z-[100] rounded-full mix-blend-difference flex items-center justify-center text-white text-[11px] font-medium uppercase tracking-[0.18em] transition-[width,height,opacity,background-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${sizeClass} ${
+      className={`pointer-events-none fixed left-0 top-0 z-[100] rounded-full mix-blend-difference flex items-center justify-center text-white text-2xs font-medium uppercase tracking-[0.18em] transition-[width,height,opacity,background-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${sizeClass} ${
         visible ? "opacity-100" : "opacity-0"
       }`}
       style={{ willChange: "transform" }}

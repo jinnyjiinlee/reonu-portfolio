@@ -50,13 +50,13 @@ export function StudioBio({ lang, dict }: StudioBioProps) {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-700" />
             <div className="pointer-events-none absolute inset-0 mix-blend-overlay opacity-[0.04] [background-image:url('data:image/svg+xml;utf8,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22120%22%20height=%22120%22><filter%20id=%22n%22><feTurbulence%20type=%22fractalNoise%22%20baseFrequency=%220.9%22%20numOctaves=%222%22/></filter><rect%20width=%22100%25%22%20height=%22100%25%22%20filter=%22url(%23n)%22/></svg>')]" />
 
-            <div className="absolute top-4 left-4 right-4 flex justify-between items-start text-white text-[10px] uppercase tracking-[0.3em] tabular-nums opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-500">
+            <div className="absolute top-4 left-4 right-4 flex justify-between items-start text-white text-2xs uppercase tracking-[0.3em] tabular-nums opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-500">
               <span>HG / 2026</span>
               <span>Seoul, KR</span>
             </div>
           </div>
 
-          <div className="mt-4 flex justify-between items-center text-[11px] uppercase tracking-[0.25em] text-text-muted tabular-nums">
+          <div className="mt-4 flex justify-between items-center text-2xs uppercase tracking-[0.25em] text-text-muted tabular-nums">
             <span>Founder</span>
             <span className="h-px flex-1 mx-3 bg-border" />
             <span>Designer</span>
