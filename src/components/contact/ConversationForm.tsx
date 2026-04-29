@@ -53,8 +53,8 @@ export function ConversationForm({ locale, dict }: ConversationFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-12 md:space-y-16">
-      <div className="space-y-10 md:space-y-12">
+    <form onSubmit={handleSubmit} className="space-y-10 md:space-y-12">
+      <div className="space-y-7 md:space-y-9">
         {template.map((line, i) => {
           const isTextareaLine =
             line.length === 1 &&
@@ -72,7 +72,7 @@ export function ConversationForm({ locale, dict }: ConversationFormProps) {
               {isTextareaLine ? (
                 renderField((line[0] as { id: string }).id)
               ) : (
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-3 text-lg md:text-xl leading-[1.9] text-foreground">
+                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2.5 text-base md:text-lg leading-[1.7] text-foreground">
                   {line.map((seg, j) =>
                     seg.kind === "text" ? (
                       <span key={j}>{seg.value}</span>
