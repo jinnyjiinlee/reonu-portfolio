@@ -4,42 +4,44 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { easeOut } from "@/lib/motion";
 
+// 6 단어가 6개의 가로 row 밴드를 차지한다. 좌/우/중앙으로 번갈아 두고
+// 인접 단어는 반대 방향으로 parallax — 차선 침범 없음.
 const keywords = [
   {
     text: "creativity",
-    speed: -80,
+    speed: -30,
     className:
-      "left-[4%] md:left-[2%] top-[8%] text-4xl sm:text-5xl md:text-6xl lg:text-7xl",
+      "left-[4%] md:left-[3%] top-[8%] text-4xl sm:text-5xl md:text-6xl",
   },
   {
     text: "imagination",
-    speed: 60,
+    speed: 40,
     className:
-      "right-[4%] md:right-[2%] top-[22%] text-4xl sm:text-5xl md:text-6xl lg:text-7xl",
+      "right-[4%] md:right-[3%] top-[24%] text-4xl sm:text-5xl md:text-6xl lg:text-7xl",
   },
   {
     text: "beauty",
-    speed: -120,
+    speed: -45,
     className:
-      "left-[6%] md:left-[8%] top-[44%] md:top-[52%] text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
-  },
-  {
-    text: "design",
-    speed: 100,
-    className:
-      "left-[20%] md:left-[22%] top-[62%] md:top-[68%] text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
+      "left-[6%] md:left-[6%] top-[42%] text-5xl sm:text-6xl md:text-7xl lg:text-8xl",
   },
   {
     text: "turning",
-    speed: -50,
+    speed: 30,
     className:
-      "right-[6%] md:right-[10%] top-[46%] md:top-[48%] text-4xl sm:text-5xl md:text-6xl",
+      "right-[6%] md:right-[8%] top-[58%] text-4xl sm:text-5xl md:text-6xl",
+  },
+  {
+    text: "design",
+    speed: -40,
+    className:
+      "left-[16%] md:left-[20%] top-[72%] text-5xl sm:text-6xl md:text-7xl",
   },
   {
     text: "clarity",
-    speed: 80,
+    speed: 35,
     className:
-      "left-[36%] md:left-[44%] top-[78%] text-4xl sm:text-5xl md:text-6xl",
+      "right-[12%] md:right-[18%] top-[88%] text-4xl sm:text-5xl md:text-6xl",
   },
 ];
 
@@ -61,7 +63,7 @@ function MarqueeWord({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 1, delay, ease: easeOut }}
       style={{ y }}
-      className={`absolute font-black tracking-tight text-foreground select-none whitespace-nowrap will-change-transform ${className}`}
+      className={`pointer-events-none absolute font-black tracking-tight text-foreground select-none whitespace-nowrap will-change-transform leading-[0.95] ${className}`}
     >
       {text}
     </motion.span>
@@ -78,22 +80,18 @@ export function KeywordMarquee() {
   return (
     <section
       ref={ref}
-      className="relative h-[70vh] md:h-screen overflow-hidden"
+      className="relative h-[80vh] md:h-screen overflow-hidden"
     >
-      {keywords.map((kw, i) => {
-        // Each word gets its own parallax speed via the closure.
-        // useTransform must be called consistently — extract to a child component.
-        return (
-          <ParallaxWord
-            key={kw.text}
-            text={kw.text}
-            className={kw.className}
-            speed={kw.speed}
-            progress={scrollYProgress}
-            delay={i * 0.08}
-          />
-        );
-      })}
+      {keywords.map((kw, i) => (
+        <ParallaxWord
+          key={kw.text}
+          text={kw.text}
+          className={kw.className}
+          speed={kw.speed}
+          progress={scrollYProgress}
+          delay={i * 0.08}
+        />
+      ))}
     </section>
   );
 }
