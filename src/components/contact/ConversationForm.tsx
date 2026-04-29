@@ -68,12 +68,7 @@ export function ConversationForm({ locale, dict }: ConversationFormProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.06 }}
-              className="relative pl-10 md:pl-14"
             >
-              <span className="absolute left-0 top-3 text-xs font-medium tabular-nums tracking-[0.2em] text-text-muted">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-
               {isTextareaLine ? (
                 renderField((line[0] as { id: string }).id)
               ) : (
@@ -93,7 +88,7 @@ export function ConversationForm({ locale, dict }: ConversationFormProps) {
       </div>
 
       {agreement && (
-        <label className="flex items-start gap-3 cursor-pointer select-none pl-10 md:pl-14">
+        <label className="flex items-start gap-3 cursor-pointer select-none">
           <input
             type="checkbox"
             name={agreement.id}
@@ -112,7 +107,7 @@ export function ConversationForm({ locale, dict }: ConversationFormProps) {
       )}
 
       {errorMsg && (
-        <p className="text-sm text-accent pl-10 md:pl-14">{errorMsg}</p>
+        <p className="text-sm text-accent">{errorMsg}</p>
       )}
 
       <SubmitBar
@@ -123,7 +118,7 @@ export function ConversationForm({ locale, dict }: ConversationFormProps) {
         locale={locale}
       />
 
-      <p className="pl-10 md:pl-14 text-xs text-text-muted leading-relaxed max-w-xl">
+      <p className="text-xs text-text-muted leading-relaxed max-w-xl">
         {contactContent.note[locale]}
       </p>
     </form>
