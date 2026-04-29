@@ -40,6 +40,9 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Korean/CJK: break only at word boundaries (어절), never mid-word.
+     No-op for Latin text since spaces already define word boundaries. */
+  word-break: keep-all;
 }
 
 ::selection {

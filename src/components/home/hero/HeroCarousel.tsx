@@ -66,6 +66,7 @@ export function HeroCarousel({
         href={active ? `/${locale}/work/${active.slug}` : `/${locale}/work`}
         className="group relative w-[60%] sm:w-[55%] md:w-[48%] lg:w-[46%] aspect-[3/4]"
         aria-label={active?.title.en ?? "View work"}
+        data-cursor-label="VIEW"
       >
         <HeroFrame frameX={frameX} frameY={frameY} />
 

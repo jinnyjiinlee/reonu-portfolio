@@ -37,23 +37,23 @@ export function PricingTierPanel({ tier, labels, lang }: PricingTierProps) {
         ))}
       </div>
 
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-10 border-t border-border pt-8">
+      <div className="mt-10 border-t border-border pt-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 md:gap-10">
         <div>
           <p className="text-xs uppercase tracking-widest text-text-muted">
             {labels.mainLabel}
           </p>
-          <p className="mt-2 text-3xl md:text-4xl font-bold tracking-tight">
-            {tier.mainPrice}
-            <span className="text-sm font-medium text-text-muted ml-1">
+          <p className="mt-2 flex items-baseline gap-1.5 text-3xl md:text-5xl font-bold tracking-tight leading-none">
+            <span>{tier.mainPrice}</span>
+            <span className="text-sm md:text-base font-medium text-text-muted">
               {labels.priceUnit}
             </span>
           </p>
         </div>
-        <div>
+        <div className="sm:text-right">
           <p className="text-xs uppercase tracking-widest text-text-muted">
             {labels.secondaryLabel}
           </p>
-          <p className="mt-2 text-3xl md:text-4xl font-bold tracking-tight text-text-secondary">
+          <p className="mt-2 text-lg md:text-xl font-semibold tracking-tight text-text-secondary leading-none">
             {tier.secondaryPrice}
           </p>
         </div>

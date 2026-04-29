@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { getFeaturedProjects } from "@/data/projects";
+import { useMagnetic } from "@/hooks/useMagnetic";
 import type { Dictionary } from "@/types/dictionary";
 import { FeaturedWorkCard } from "./FeaturedWorkCard";
 
@@ -14,6 +16,8 @@ interface FeaturedWorkProps {
 export function FeaturedWork({ locale, dict }: FeaturedWorkProps) {
   const lang = locale as "ko" | "en";
   const featured = getFeaturedProjects(4);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const ctaRef = useMagnetic<HTMLAnchorElement>({ strength: 10, radius: 110 });
 
   return (
     <section id="work" className="py-24 md:py-40 px-5 md:px-10">
@@ -31,18 +35,25 @@ export function FeaturedWork({ locale, dict }: FeaturedWorkProps) {
             </h2>
           </div>
           <Link
+            ref={ctaRef}
             href={`/${locale}/work`}
-            className="hidden md:inline-flex text-sm font-medium text-foreground items-center gap-2 group"
+            className="hidden md:inline-flex text-sm font-medium text-foreground items-center gap-2 group will-change-transform"
           >
-            {dict.projects.viewAll}
-            <span className="inline-block w-6 h-px bg-foreground origin-left scale-x-100 group-hover:scale-x-[1.8] transition-transform" />
-            <span className="group-hover:translate-x-1 transition-transform">
+            <span className="relative">
+              {dict.projects.viewAll}
+              <span className="absolute left-0 -bottom-1 h-px w-full bg-foreground origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+            </span>
+            <span className="inline-block w-6 h-px bg-foreground origin-left scale-x-100 group-hover:scale-x-[1.8] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+            <span className="group-hover:translate-x-1 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
               &rarr;
             </span>
           </Link>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-14 md:gap-x-8 md:gap-y-20">
+        <div
+          onMouseLeave={() => setHoveredId(null)}
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-14 md:gap-x-8 md:gap-y-20"
+        >
           {featured.map((project, i) => (
             <FeaturedWorkCard
               key={project.id}
@@ -51,6 +62,9 @@ export function FeaturedWork({ locale, dict }: FeaturedWorkProps) {
               total={featured.length}
               locale={locale}
               lang={lang}
+              hoveredId={hoveredId}
+              onHoverStart={setHoveredId}
+              onHoverEnd={() => setHoveredId(null)}
             />
           ))}
         </div>

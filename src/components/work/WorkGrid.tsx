@@ -14,6 +14,7 @@ interface WorkGridProps {
 
 export function WorkGrid({ locale, dict }: WorkGridProps) {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
   const lang = locale as "ko" | "en";
 
   const sorted = useMemo(
@@ -71,6 +72,7 @@ export function WorkGrid({ locale, dict }: WorkGridProps) {
 
       <motion.div
         layout
+        onMouseLeave={() => setHoveredId(null)}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
       >
         <AnimatePresence mode="popLayout">
@@ -80,6 +82,9 @@ export function WorkGrid({ locale, dict }: WorkGridProps) {
               project={project}
               locale={locale}
               lang={lang}
+              hoveredId={hoveredId}
+              onHoverStart={setHoveredId}
+              onHoverEnd={() => setHoveredId(null)}
             />
           ))}
         </AnimatePresence>

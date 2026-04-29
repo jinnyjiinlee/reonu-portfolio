@@ -19,6 +19,10 @@ export const contactContent: ContactContent = {
     },
   },
   submit: { ko: "문의 보내기", en: "Send Inquiry" },
+  note: {
+    ko: "예산과 일정 선택 항목을 통해 상담 전 기본 범위를 빠르게 파악할 수 있도록 구성",
+    en: "Budget and timeline fields help identify the project scope before consultation",
+  },
   fields,
   template: { ko: koTemplate, en: enTemplate },
 };

@@ -22,19 +22,23 @@ export function HeroWordmark({
       <div className="flex items-end justify-between gap-4">
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[0.85] tracking-tighter text-foreground flex">
           {"REONU".split("").map((ch, i) => (
-            <motion.span
+            <span
               key={ch + i}
-              initial={{ y: "110%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                duration: 1.1,
-                delay: 0.5 + i * 0.06,
-                ease: easeOut,
-              }}
-              className="inline-block overflow-hidden"
+              className="inline-block overflow-hidden pb-[0.05em]"
             >
-              {ch}
-            </motion.span>
+              <motion.span
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 1.1,
+                  delay: 0.5 + i * 0.06,
+                  ease: easeOut,
+                }}
+                className="inline-block"
+              >
+                {ch}
+              </motion.span>
+            </span>
           ))}
         </h1>
 

@@ -122,6 +122,10 @@ export function ConversationForm({ locale, dict }: ConversationFormProps) {
         totalRequired={totalRequired}
         locale={locale}
       />
+
+      <p className="pl-10 md:pl-14 text-xs text-text-muted leading-relaxed max-w-xl">
+        {contactContent.note[locale]}
+      </p>
     </form>
   );
 }

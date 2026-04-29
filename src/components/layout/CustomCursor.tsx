@@ -7,6 +7,7 @@ export function CustomCursor() {
   const [hovering, setHovering] = useState(false);
   const [pressed, setPressed] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [label, setLabel] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -24,6 +25,13 @@ export function CustomCursor() {
     const onOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
+      const labelEl = target.closest<HTMLElement>("[data-cursor-label]");
+      if (labelEl) {
+        setLabel(labelEl.dataset.cursorLabel || "");
+        setHovering(true);
+        return;
+      }
+      setLabel(null);
       const interactive = target.closest(
         "a, button, [role='button'], input, textarea, select, label, [data-cursor='hover']",
       );
@@ -53,16 +61,28 @@ export function CustomCursor() {
     };
   }, []);
 
-  const size = hovering ? "w-16 h-16" : pressed ? "w-5 h-5" : "w-6 h-6";
+  const sizeClass = label
+    ? "w-24 h-24 bg-foreground"
+    : hovering
+      ? "w-16 h-16 bg-white"
+      : pressed
+        ? "w-5 h-5 bg-white"
+        : "w-6 h-6 bg-white";
 
   return (
     <div
       ref={dotRef}
       aria-hidden
-      className={`pointer-events-none fixed left-0 top-0 z-[100] rounded-full bg-white mix-blend-difference transition-[width,height,opacity] duration-200 ease-out ${size} ${
+      className={`pointer-events-none fixed left-0 top-0 z-[100] rounded-full mix-blend-difference flex items-center justify-center text-white text-[11px] font-medium uppercase tracking-[0.18em] transition-[width,height,opacity,background-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${sizeClass} ${
         visible ? "opacity-100" : "opacity-0"
       }`}
       style={{ willChange: "transform" }}
-    />
+    >
+      <span
+        className={`transition-opacity duration-200 ${label ? "opacity-100 delay-100" : "opacity-0"}`}
+      >
+        {label}
+      </span>
+    </div>
   );
 }

@@ -26,6 +26,7 @@ export interface ContactContent {
     description: { ko: string[]; en: string[] };
   };
   submit: { ko: string; en: string };
+  note: { ko: string; en: string };
   fields: FormFieldDef[];
   template: { ko: TemplateLine[]; en: TemplateLine[] };
 }

@@ -43,9 +43,11 @@ export function HomeContact({ locale, dict }: HomeContactProps) {
               </h3>
               <a
                 href="mailto:reonustudio@gmail.com"
-                className="text-base font-medium hover:text-accent transition-colors"
+                className="group/email relative inline-block text-base font-medium transition-colors hover:text-accent"
+                data-cursor-label="MAIL"
               >
-                reonustudio@gmail.com
+                <span>reonustudio@gmail.com</span>
+                <span className="absolute left-0 -bottom-0.5 h-px w-full bg-current origin-left scale-x-0 group-hover/email:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
               </a>
             </div>
           </div>
