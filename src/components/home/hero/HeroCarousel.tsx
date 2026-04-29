@@ -64,52 +64,55 @@ export function HeroCarousel({
     >
       <Link
         href={active ? `/${locale}/work/${active.slug}` : `/${locale}/work`}
-        className="group relative w-[60%] sm:w-[55%] md:w-[48%] lg:w-[46%] aspect-[3/4]"
+        className="group relative w-[68%] sm:w-[60%] md:w-[54%] lg:w-[52%]"
         aria-label={active?.title.en ?? "View work"}
         data-cursor-label="VIEW"
       >
-        <HeroFrame frameX={frameX} frameY={frameY} />
+        <div className="relative aspect-square">
+          <HeroFrame frameX={frameX} frameY={frameY} />
 
-        <motion.div
-          style={{
-            x: imgTranslateX,
-            y: imgTranslateY,
-            rotate: imgRotate,
-            scale: imageScale,
-          }}
-          className="absolute inset-0 overflow-hidden bg-surface rounded-sm shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]"
-        >
-          <AnimatePresence mode="sync">
-            {active && (
-              <motion.div
-                key={active.slug}
-                initial={{ opacity: 0, scale: 1.06 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.02 }}
-                transition={{ duration: 1.1, ease: easeOut }}
-                className="absolute inset-0"
-              >
-                <Image
-                  src={active.thumbnail}
-                  alt={active.title.en}
-                  fill
-                  sizes="(min-width: 1024px) 40vw, 60vw"
-                  className="object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <motion.div
+            style={{
+              x: imgTranslateX,
+              y: imgTranslateY,
+              rotate: imgRotate,
+              scale: imageScale,
+            }}
+            className="absolute inset-0 overflow-hidden bg-surface rounded-sm ring-1 ring-foreground/[0.08] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.25)]"
+          >
+            <AnimatePresence mode="wait">
+              {active && (
+                <motion.div
+                  key={active.slug}
+                  initial={{ opacity: 0, scale: 1.04 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.55, ease: easeOut }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={active.thumbnail}
+                    alt={active.title.en}
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 60vw"
+                    className="object-cover"
+                    priority
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
-          <HeroCardMeta
-            active={active}
-            activeIdx={activeIdx}
-            total={projects.length}
-          />
-        </motion.div>
+          <HeroMagneticCTA ctaX={ctaX} ctaY={ctaY} />
+        </div>
 
-        <div className="absolute -bottom-5 left-0 right-0 flex gap-1">
+        <HeroCardMeta
+          active={active}
+          activeIdx={activeIdx}
+          total={projects.length}
+        />
+
+        <div className="mt-3 flex gap-1">
           {projects.map((_, i) => (
             <span
               key={i}
@@ -119,8 +122,6 @@ export function HeroCarousel({
             />
           ))}
         </div>
-
-        <HeroMagneticCTA ctaX={ctaX} ctaY={ctaY} />
       </Link>
     </motion.div>
   );

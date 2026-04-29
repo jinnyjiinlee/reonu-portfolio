@@ -4,16 +4,11 @@ import { motion, type MotionValue } from "framer-motion";
 import { easeOut } from "@/lib/motion";
 
 interface HeroWordmarkProps {
-  scrollLabel: string;
   titleY: MotionValue<number>;
   titleScale: MotionValue<number>;
 }
 
-export function HeroWordmark({
-  scrollLabel,
-  titleY,
-  titleScale,
-}: HeroWordmarkProps) {
+export function HeroWordmark({ titleY, titleScale }: HeroWordmarkProps) {
   return (
     <motion.div
       style={{ y: titleY, scale: titleScale }}
@@ -48,7 +43,7 @@ export function HeroWordmark({
           transition={{ duration: 0.8, delay: 1.2 }}
           className="hidden md:flex flex-col items-end gap-1 pb-2"
         >
-          <span className="text-xs uppercase tracking-[0.22em] text-text-muted">
+          <span className="text-2xs uppercase tracking-[0.22em] text-text-muted">
             Est. 2017
           </span>
           <span className="text-sm font-medium text-foreground">
@@ -56,20 +51,6 @@ export function HeroWordmark({
           </span>
         </motion.div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 1.4 }}
-        className="absolute right-0 -top-10 hidden md:flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-text-muted"
-      >
-        <span>{scrollLabel}</span>
-        <motion.span
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          className="block w-px h-5 bg-foreground/40"
-        />
-      </motion.div>
     </motion.div>
   );
 }

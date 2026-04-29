@@ -46,7 +46,7 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
     <motion.section
       ref={sectionRef}
       style={{ opacity: heroOpacity, y: heroY }}
-      className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-32 md:pt-44 pb-10 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-28 md:pt-36 pb-10 overflow-hidden"
     >
       <motion.div
         aria-hidden
@@ -64,7 +64,7 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
       />
 
       <div className="relative max-w-[1400px] w-full mx-auto flex flex-col lg:flex-row gap-10 lg:gap-16 flex-1">
-        <HeroIntro intro={dict.hero.intro} activeIdx={activeIdx} />
+        <HeroIntro intro={dict.hero.intro} activeIdx={activeIdx} locale={locale} />
         <HeroCarousel
           projects={rotatingProjects}
           activeIdx={activeIdx}
@@ -73,11 +73,7 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
         />
       </div>
 
-      <HeroWordmark
-        scrollLabel={dict.hero.scroll}
-        titleY={titleY}
-        titleScale={titleScale}
-      />
+      <HeroWordmark titleY={titleY} titleScale={titleScale} />
     </motion.section>
   );
 }

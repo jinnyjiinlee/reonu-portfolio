@@ -18,18 +18,18 @@ export function HeroMagneticCTA({ ctaX, ctaY }: HeroMagneticCTAProps) {
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.6, ease: easeOut }}
-        className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-foreground text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-xl relative"
+        className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-foreground text-white flex items-center justify-center transition-[width,height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-20 group-hover:h-20 md:group-hover:w-24 md:group-hover:h-24 shadow-xl relative"
       >
         <span
           aria-hidden
-          className="absolute inset-0 rounded-full border border-foreground/40 animate-[ping_1.6s_ease-out_infinite]"
+          className="absolute inset-0 rounded-full border border-white/40 animate-[ping_1.8s_ease-out_infinite]"
         />
         <svg
           width="22"
           height="22"
           viewBox="0 0 24 24"
           fill="none"
-          className="relative"
+          className="relative transition-transform duration-500 group-hover:translate-x-1"
         >
           <path
             d="M5 12h14M12 5l7 7-7 7"
