@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { liveProjects } from "@/data/projects";
 import type { Dictionary } from "@/types/dictionary";
+import { PageHero } from "@/components/shared/PageHero";
 import { WorkFilters, type FilterKey } from "./WorkFilters";
 import { WorkCard } from "./WorkCard";
 
@@ -48,47 +49,42 @@ export function WorkGrid({ locale, dict }: WorkGridProps) {
   );
 
   return (
-    <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-32 md:pt-44 pb-24">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mb-10 md:mb-14"
-      >
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-          {dict.work.title}
-        </h1>
-        <p className="mt-4 text-base md:text-lg text-text-secondary max-w-xl">
-          {dict.work.intro}
-        </p>
-      </motion.div>
-
-      <WorkFilters
-        active={activeFilter}
-        onChange={setActiveFilter}
-        labels={filterLabels}
-        counts={counts}
+    <div className="pt-32 md:pt-44">
+      <PageHero
+        index="01"
+        section="Work"
+        title={["SELECTED", "WORK"]}
+        subtitle={dict.work.intro}
       />
 
-      <motion.div
-        layout
-        onMouseLeave={() => setHoveredId(null)}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
-      >
-        <AnimatePresence mode="popLayout">
-          {filtered.map((project) => (
-            <WorkCard
-              key={project.id}
-              project={project}
-              locale={locale}
-              lang={lang}
-              hoveredId={hoveredId}
-              onHoverStart={setHoveredId}
-              onHoverEnd={() => setHoveredId(null)}
-            />
-          ))}
-        </AnimatePresence>
-      </motion.div>
+      <div className="max-w-[1400px] mx-auto px-5 md:px-10 pb-24">
+        <WorkFilters
+          active={activeFilter}
+          onChange={setActiveFilter}
+          labels={filterLabels}
+          counts={counts}
+        />
+
+        <motion.div
+          layout
+          onMouseLeave={() => setHoveredId(null)}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
+        >
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project) => (
+              <WorkCard
+                key={project.id}
+                project={project}
+                locale={locale}
+                lang={lang}
+                hoveredId={hoveredId}
+                onHoverStart={setHoveredId}
+                onHoverEnd={() => setHoveredId(null)}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
     </div>
   );
 }
