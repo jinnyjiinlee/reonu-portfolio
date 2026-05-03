@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Instrument_Serif } from "next/font/google";
 import { locales } from "@/lib/getDictionary";
 import { getDictionary } from "@/lib/getDictionary";
 import { Navigation } from "@/components/layout/Navigation";
@@ -10,6 +10,14 @@ import { SmoothScrollProvider } from "@/components/shared/SmoothScrollProvider";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
   display: "swap",
 });
 
@@ -62,7 +70,7 @@ export default async function LocaleLayout({
   const dict = await getDictionary(locale);
 
   return (
-    <html lang={locale} className={`${inter.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${instrumentSerif.variable}`}>
       <head>
         <link
           rel="stylesheet"

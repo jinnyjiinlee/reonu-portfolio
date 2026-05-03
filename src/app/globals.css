@@ -12,6 +12,8 @@
 
   --font-sans: "Inter", "Pretendard", -apple-system, BlinkMacSystemFont,
     sans-serif;
+  --font-serif: var(--font-instrument-serif), "Iowan Old Style",
+    "Apple Garamond", Georgia, serif;
 
   /* Typography scale — aligned to reference (Möbius). Single source of truth.
      Use only these tokens; arbitrary text-[Npx] values are reserved for the

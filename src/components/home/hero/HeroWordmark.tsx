@@ -5,13 +5,12 @@ import { easeOut } from "@/lib/motion";
 
 interface HeroWordmarkProps {
   titleY: MotionValue<number>;
-  titleScale: MotionValue<number>;
 }
 
-export function HeroWordmark({ titleY, titleScale }: HeroWordmarkProps) {
+export function HeroWordmark({ titleY }: HeroWordmarkProps) {
   return (
     <motion.div
-      style={{ y: titleY, scale: titleScale }}
+      style={{ y: titleY }}
       className="relative max-w-[1400px] w-full mx-auto mt-10 lg:mt-0"
     >
       <div className="flex items-end justify-between gap-4">
