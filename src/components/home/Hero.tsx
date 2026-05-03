@@ -64,17 +64,16 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
     <motion.section
       ref={sectionRef}
       style={{ opacity: heroOpacity }}
-      className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-28 md:pt-32 pb-6 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-36 md:pt-48 pb-6 overflow-hidden"
     >
       <div className="relative max-w-[1400px] w-full mx-auto flex-1 flex flex-col">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: easeOut }}
-          className="max-w-[420px] text-sm md:text-[15px] leading-[1.6] text-foreground"
+          className="max-w-[420px] text-sm md:text-[15px] leading-[1.6] text-text-secondary"
         >
-          <span className="font-bold">REONU®</span>
-          <span className="text-text-secondary"> — {intro}</span>
+          {intro}
         </motion.p>
 
         <motion.div
