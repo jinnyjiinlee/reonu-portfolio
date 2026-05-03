@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import {
   AnimatePresence,
   motion,
@@ -12,7 +12,6 @@ import {
 import type { Dictionary } from "@/types/dictionary";
 import { easeOut } from "@/lib/motion";
 import { liveProjects } from "@/data/projects";
-import { CATEGORY_LABEL } from "@/types/project";
 import { HeroWordmark } from "./hero/HeroWordmark";
 
 interface HeroProps {
@@ -20,67 +19,32 @@ interface HeroProps {
   locale?: string;
 }
 
-const focusKeywords = [
-  "UX·UI",
-  "BRANDING",
-  "EDITORIAL",
-  "IDENTITY",
-  "SYSTEM",
-  "MOTION",
-];
-
-const ROTATE_MS = 4600;
 const PLACEHOLDER = "/images/placeholder.svg";
+const ROTATE_MS = 4400;
 
-const heroProjects = liveProjects
+const stackProjects = liveProjects
   .filter((p) => p.thumbnail && p.thumbnail !== PLACEHOLDER)
-  .slice(0, 6);
+  .slice(0, 5);
 
-const ACCENT_BASES = [
-  "imagination",
-  "clarity",
-  "beauty",
-  "connection",
-  "craft",
-  "상상",
-  "명확함",
-  "연결",
-  "아름다움",
+// Position/rotation for each card in the stack. Last entry is the front-most
+// card (highest z-index, no rotation, fully visible).
+const STACK_LAYOUT = [
+  { x: "-26%", y: "-7%", rotate: -11, scale: 0.84 },
+  { x: "20%", y: "-3%", rotate: -4, scale: 0.91 },
+  { x: "-14%", y: "8%", rotate: 6, scale: 0.93 },
+  { x: "22%", y: "12%", rotate: 10, scale: 0.86 },
+  { x: "0%", y: "0%", rotate: 0, scale: 1 },
 ];
-
-const HANGUL_RE = /[㄰-㆏가-힯]/;
-
-const stripPunct = (w: string) => w.replace(/[^\p{L}\p{N}]/gu, "");
-
-function accentClass(word: string): string {
-  const lower = stripPunct(word).toLowerCase();
-  const stripped = stripPunct(word);
-  const hit = ACCENT_BASES.some(
-    (base) => lower.includes(base) || stripped.includes(base),
-  );
-  if (!hit) return "";
-  return HANGUL_RE.test(word)
-    ? "font-medium text-foreground"
-    : "italic font-serif font-normal tracking-normal text-foreground";
-}
 
 export function Hero({ dict, locale = "en" }: HeroProps) {
   const lang = (locale === "ko" ? "ko" : "en") as "ko" | "en";
   const [activeIdx, setActiveIdx] = useState(0);
-  const [projectIdx, setProjectIdx] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (stackProjects.length <= 1) return;
     const id = setInterval(() => {
-      setActiveIdx((i) => (i + 1) % focusKeywords.length);
-    }, ROTATE_MS);
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    if (heroProjects.length <= 1) return;
-    const id = setInterval(() => {
-      setProjectIdx((i) => (i + 1) % heroProjects.length);
+      setActiveIdx((i) => (i + 1) % stackProjects.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
   }, []);
@@ -90,179 +54,105 @@ export function Hero({ dict, locale = "en" }: HeroProps) {
     offset: ["start start", "end start"],
   });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
-  const titleY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const stackY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const wordmarkY = useTransform(scrollYProgress, [0, 1], [0, -80]);
 
-  const headlineWords = dict.statement.text.split(/\s+/);
-  const focus = focusKeywords[activeIdx % focusKeywords.length];
-  const project = heroProjects[projectIdx];
-  const projectCategory = project
-    ? project.categoryLabel?.[lang] ?? CATEGORY_LABEL[project.category][lang]
-    : "";
+  const intro = dict.hero.intro.replace(/^\s*REONU®?\s*[—–-]\s*/i, "");
+  const front = stackProjects[activeIdx];
 
   return (
     <motion.section
       ref={sectionRef}
       style={{ opacity: heroOpacity }}
-      className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-28 md:pt-32 pb-10"
+      className="relative min-h-screen flex flex-col justify-between px-5 md:px-10 pt-28 md:pt-32 pb-6 overflow-hidden"
     >
       <div className="relative max-w-[1400px] w-full mx-auto flex-1 flex flex-col">
-        <motion.span
-          initial={{ opacity: 0, y: 6 }}
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-2xs uppercase tracking-[0.3em] text-text-muted"
+          transition={{ duration: 0.8, delay: 0.3, ease: easeOut }}
+          className="max-w-[420px] text-sm md:text-[15px] leading-[1.6] text-foreground"
         >
-          Design Studio · Seoul · Est 2017
-        </motion.span>
+          <span className="font-bold">REONU®</span>
+          <span className="text-text-secondary"> — {intro}</span>
+        </motion.p>
 
-        <div className="flex-1 mt-8 md:mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] gap-12 lg:gap-14 items-center">
-          <div className="flex flex-col gap-10 md:gap-12">
-            <h1
-              className={`${
-                lang === "ko"
-                  ? "max-w-[14ch] text-[26px] sm:text-3xl md:text-[34px] lg:text-[40px] xl:text-[48px] leading-[1.3]"
-                  : "max-w-[15ch] text-[30px] sm:text-4xl md:text-5xl lg:text-[52px] xl:text-6xl leading-[1.15]"
-              } tracking-[-0.015em] font-normal text-foreground`}
-            >
-              {headlineWords.map((word, i) => (
-                <motion.span
-                  key={`${word}-${i}`}
-                  initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        <motion.div
+          style={{ y: stackY }}
+          className="flex-1 flex items-center justify-center relative py-8 md:py-12"
+        >
+          <Link
+            href={front ? `/${locale}/work/${front.slug}` : `/${locale}/work`}
+            data-cursor-label="VIEW"
+            className="group relative w-[260px] sm:w-[320px] md:w-[380px] lg:w-[420px] aspect-[3/4] z-10"
+            aria-label={front?.title[lang] ?? "View work"}
+          >
+            {stackProjects.map((p, i) => {
+              const layoutIdx = (i - activeIdx + stackProjects.length) % stackProjects.length;
+              const layout = STACK_LAYOUT[layoutIdx] ?? STACK_LAYOUT[0];
+              const isFront = layoutIdx === STACK_LAYOUT.length - 1;
+              return (
+                <motion.div
+                  key={p.slug}
+                  initial={{ opacity: 0, y: 30, scale: 0.85 }}
+                  animate={{
+                    opacity: 1,
+                    x: layout.x,
+                    y: layout.y,
+                    rotate: layout.rotate,
+                    scale: layout.scale,
+                  }}
                   transition={{
-                    duration: 0.9,
-                    delay: 0.35 + i * 0.05,
+                    duration: isFront ? 0.9 : 1.1,
+                    delay: isFront ? 0.3 : 0.4 + layoutIdx * 0.08,
                     ease: easeOut,
                   }}
-                  className={`inline-block mr-[0.22em] ${accentClass(word)}`}
+                  style={{ zIndex: layoutIdx + 1 }}
+                  className={`absolute inset-0 origin-center overflow-hidden bg-surface ${
+                    isFront
+                      ? "shadow-[0_40px_80px_-30px_rgba(0,0,0,0.35)]"
+                      : "shadow-[0_20px_50px_-25px_rgba(0,0,0,0.25)]"
+                  } transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    isFront ? "group-hover:scale-[1.02]" : ""
+                  }`}
                 >
-                  {word}
-                </motion.span>
-              ))}
-            </h1>
-
-            <div className="flex flex-wrap items-center justify-between gap-6">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 1.0 }}
-                className="flex items-center gap-2 text-2xs uppercase tracking-[0.3em] text-text-muted"
-              >
-                <span>Currently</span>
-                <span aria-hidden>·</span>
-                <div className="relative h-4 overflow-hidden">
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={focus}
-                      initial={{ y: 16, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -16, opacity: 0 }}
-                      transition={{ duration: 0.5, ease: easeOut }}
-                      className="block text-foreground"
-                    >
-                      {focus}
-                    </motion.span>
-                  </AnimatePresence>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.1 }}
-              >
-                <Link
-                  href={`/${locale}/work`}
-                  data-cursor-label="WORK"
-                  className="group inline-flex items-center gap-3 text-sm font-medium tracking-wide text-foreground"
-                >
-                  <span className="relative">
-                    View selected work
-                    <span className="absolute left-0 -bottom-0.5 h-px w-full bg-current origin-left transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] scale-x-100 group-hover:scale-x-0" />
-                  </span>
-                  <span className="transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5">
-                    →
-                  </span>
-                </Link>
-              </motion.div>
-            </div>
-          </div>
-
-          {project && (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5, ease: easeOut }}
-              className="w-full max-w-[440px] mx-auto lg:ml-auto lg:mr-0 flex flex-col gap-4"
-            >
-              <Link
-                href={`/${locale}/work/${project.slug}`}
-                data-cursor-label="VIEW"
-                className="group block relative aspect-square overflow-hidden bg-surface"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={project.slug}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.7, ease: easeOut }}
-                    className="absolute inset-0"
-                  >
-                    <Image
-                      src={project.thumbnail}
-                      alt={project.title[lang]}
-                      fill
-                      sizes="(min-width: 1024px) 440px, (min-width: 640px) 60vw, 100vw"
-                      className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
-                      priority
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </Link>
-
-              <div className="flex items-end justify-between gap-4">
-                <div className="flex flex-col gap-1 min-w-0">
-                  <span className="text-2xs uppercase tracking-[0.25em] text-text-muted">
-                    {projectCategory}
-                  </span>
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={`title-${project.slug}`}
-                      initial={{ y: 8, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -8, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: easeOut }}
-                      className="text-sm md:text-[15px] font-medium text-foreground truncate"
-                    >
-                      {project.title[lang]}
-                    </motion.span>
-                  </AnimatePresence>
-                </div>
-                <span className="text-2xs tabular-nums text-text-muted shrink-0">
-                  {String(projectIdx + 1).padStart(2, "0")} / {String(heroProjects.length).padStart(2, "0")}
-                </span>
-              </div>
-
-              <div className="flex gap-1">
-                {heroProjects.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    aria-label={`Show project ${i + 1}`}
-                    onClick={() => setProjectIdx(i)}
-                    className={`h-px flex-1 transition-colors duration-500 ${
-                      i === projectIdx ? "bg-foreground" : "bg-foreground/15"
-                    }`}
+                  <Image
+                    src={p.thumbnail}
+                    alt={p.title[lang]}
+                    fill
+                    sizes="(min-width: 1024px) 420px, 60vw"
+                    className="object-cover"
+                    priority={isFront}
                   />
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </div>
+                </motion.div>
+              );
+            })}
+
+            <AnimatePresence mode="wait">
+              {front && (
+                <motion.div
+                  key={`caption-${front.slug}`}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.4, ease: easeOut }}
+                  className="absolute -bottom-10 md:-bottom-12 left-0 right-0 flex items-center justify-center gap-2 text-2xs uppercase tracking-[0.25em] text-text-muted"
+                  style={{ zIndex: 20 }}
+                >
+                  <span>{front.title[lang]}</span>
+                  <span aria-hidden>·</span>
+                  <span className="tabular-nums">
+                    {String(activeIdx + 1).padStart(2, "0")} /
+                    {String(stackProjects.length).padStart(2, "0")}
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Link>
+        </motion.div>
       </div>
 
-      <HeroWordmark titleY={titleY} />
+      <HeroWordmark titleY={wordmarkY} />
     </motion.section>
   );
 }

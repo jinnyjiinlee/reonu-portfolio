@@ -11,10 +11,10 @@ export function HeroWordmark({ titleY }: HeroWordmarkProps) {
   return (
     <motion.div
       style={{ y: titleY }}
-      className="relative max-w-[1400px] w-full mx-auto mt-10 lg:mt-0"
+      className="relative max-w-[1400px] w-full mx-auto mt-6 lg:mt-0 z-0"
     >
       <div className="flex items-end justify-between gap-4">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black leading-[0.85] tracking-tighter text-foreground flex">
+        <h1 className="text-[clamp(72px,22vw,300px)] font-black leading-[0.82] tracking-[-0.04em] text-foreground flex">
           {"REONU".split("").map((ch, i) => (
             <span
               key={ch + i}
@@ -36,19 +36,14 @@ export function HeroWordmark({ titleY }: HeroWordmarkProps) {
           ))}
         </h1>
 
-        <motion.div
+        <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="hidden md:flex flex-col items-end gap-1 pb-2"
+          className="hidden md:block text-sm font-medium text-foreground pb-4 lg:pb-6 shrink-0"
         >
-          <span className="text-2xs uppercase tracking-[0.22em] text-text-muted">
-            Est. 2017
-          </span>
-          <span className="text-sm font-medium text-foreground">
-            &copy; 2017&ndash;26
-          </span>
-        </motion.div>
+          &copy; 2017&ndash;26
+        </motion.span>
       </div>
     </motion.div>
   );
